@@ -67,7 +67,7 @@ const Footer = () => {
                                 className="flex items-center gap-2 sm:gap-3 text-background/80 hover:text-primary transition-colors"
                             >
                                 <Phone className="h-3 w-3 sm:h-4 sm:w-4 text-primary flex-shrink-0" />
-                                <span className="text-xs sm:text-sm">647 459 5384</span>
+                                <span className="text-xs sm:text-sm">613 672 7062</span>
                             </a>
                             <a
                                 href="mailto:info@peopleforhonor.com"

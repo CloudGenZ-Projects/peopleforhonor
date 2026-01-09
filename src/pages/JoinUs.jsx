@@ -421,7 +421,7 @@ const JoinUs = () => {
                                     <div className="flex flex-col items-center">
                                         <Phone className="h-8 w-8 text-primary mb-2" />
                                         <p className="font-semibold text-foreground mb-1">Phone</p>
-                                        <p className="text-sm text-muted-foreground">647 459 5384</p>
+                                        <p className="text-sm text-muted-foreground">613 672 7062</p>
                                     </div>
                                     <div className="flex flex-col items-center">
                                         <MapPin className="h-8 w-8 text-primary mb-2" />

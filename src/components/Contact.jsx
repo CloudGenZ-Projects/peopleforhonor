@@ -13,7 +13,7 @@ const Contact = () => {
         {
             icon: Phone,
             title: "Call Us",
-            details: "647 459 5384",
+            details: "613 672 7062",
             description: "Mon - Fri: 9:00 AM - 6:00 PM"
         },
         {
