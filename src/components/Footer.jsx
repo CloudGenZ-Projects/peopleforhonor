@@ -63,7 +63,7 @@ const Footer = () => {
                         {/* Contact Info */}
                         <div className="space-y-2 sm:space-y-3">
                             <a
-                                href="tel:6474595384"
+                                href="tel:6136727062"
                                 className="flex items-center gap-2 sm:gap-3 text-background/80 hover:text-primary transition-colors"
                             >
                                 <Phone className="h-3 w-3 sm:h-4 sm:w-4 text-primary flex-shrink-0" />
