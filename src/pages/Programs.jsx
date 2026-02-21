@@ -243,7 +243,14 @@ const Programs = () => {
                                             <ArrowRight className="ml-2 h-4 w-4" />
                                         </Link>
                                     </Button>
-                                    <Button variant="outline" className="w-full">
+                                    <Button variant="outline" className="w-full"
+                                        onClick={() =>
+                                            window.open(
+                                                "https://docs.google.com/forms/d/e/1FAIpQLSfragX8BIMhxvgkFhyOc6nOJ7i8AJ9P8dl30OzlovYvCJ60zg/viewform",
+                                                "_blank"
+                                            )
+                                        }
+                                    >
                                         Become a Volunteer Coach
                                     </Button>
                                 </div>
@@ -304,7 +311,14 @@ const Programs = () => {
                                             <ArrowRight className="ml-2 h-4 w-4" />
                                         </Link>
                                     </Button>
-                                    <Button variant="outline" className="w-full">
+                                    <Button variant="outline" className="w-full"
+                                        onClick={() =>
+                                            window.open(
+                                                "https://docs.google.com/forms/d/e/1FAIpQLSfragX8BIMhxvgkFhyOc6nOJ7i8AJ9P8dl30OzlovYvCJ60zg/viewform",
+                                                "_blank"
+                                            )
+                                        }
+                                    >
                                         Volunteer as a Mentor
                                     </Button>
                                     <Button variant="outline" className="w-full">

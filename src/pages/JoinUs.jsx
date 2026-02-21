@@ -305,7 +305,13 @@ const JoinUs = () => {
                                 <p className="text-sm text-muted-foreground mb-4">
                                     Donate stocks, mutual funds, or ETFs. Avoid capital gains tax while maximizing impact.
                                 </p>
-                                <Button variant="outline" className="w-full" size="sm">
+                                <Button variant="outline" className="w-full" size="sm"
+                                
+                               onClick={() => window.open(
+    "https://docs.google.com/forms/d/e/1FAIpQLSeCFnInCVyyaS5FA3-BYdb5nrjO45x3A1jVhYuQ76DpjGYcTA/viewform",
+    "_blank",
+    "noopener,noreferrer"
+  )} >
                                     Donate Securities
                                 </Button>
                             </Card>
@@ -337,7 +343,14 @@ const JoinUs = () => {
                                                 <p className="text-sm text-muted-foreground mb-3">Sponsor a cohort, match employee gifts, or support a campaign</p>
                                             </div>
                                         </div>
-                                        <Button variant="outline" className="w-full" size="sm">
+                                        <Button variant="outline" className="w-full" size="sm"
+                                          onClick={() =>
+    window.open(
+      "https://docs.google.com/forms/d/e/1FAIpQLSfcNagXyfbUpyI6Xeo5IXjcRulJQqDJMN7w6XbqZi9ZpwWzzw/viewform",
+      "_blank"
+    )
+  }
+                                        >
                                             Partner with PFH
                                         </Button>
                                     </Card>
@@ -350,7 +363,17 @@ const JoinUs = () => {
                                                 <p className="text-sm text-muted-foreground mb-3">Laptops, sewing fabric/notions, barber tools, printing, space, snacks</p>
                                             </div>
                                         </div>
-                                        <Button variant="outline" className="w-full" size="sm">
+                                        <Button variant="outline" className="w-full" size="sm"
+                                        
+                                         onClick={() =>
+    window.open(
+      "https://docs.google.com/forms/d/e/1FAIpQLSf8i0d7h0kfIn2iv4bnAHK35pUP3r3SmRO7RLWkkkEqjjy5lw/viewform",
+      "_blank"
+    )
+  }
+                                        
+                                        
+                                        >
                                             Offer an In-Kind Gift
                                         </Button>
                                     </Card>
@@ -363,7 +386,15 @@ const JoinUs = () => {
                                                 <p className="text-sm text-muted-foreground mb-3">Become a coach or mentor (2–4 hrs/month)</p>
                                             </div>
                                         </div>
-                                        <Button variant="outline" className="w-full" size="sm">
+                                        <Button variant="outline" className="w-full" size="sm"
+                                          onClick={() =>
+    window.open(
+      "https://docs.google.com/forms/d/e/1FAIpQLSfcNagXyfbUpyI6Xeo5IXjcRulJQqDJMN7w6XbqZi9ZpwWzzw/viewform",
+      "_blank"
+    )
+  }
+                                        
+                                        >
                                             Volunteer with PFH
                                         </Button>
                                     </Card>

@@ -176,11 +176,25 @@ const CoachingProgram = () => {
                                     our trained coaches are here to support you every step of the way.
                                 </p>
                                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                                    <Button className="bg-gradient-primary hover:bg-primary-hover" size="lg">
+                                    <Button className="bg-gradient-primary hover:bg-primary-hover" size="lg"
+                                       onClick={() =>
+    window.open(
+      "https://docs.google.com/forms/d/e/1FAIpQLSfragX8BIMhxvgkFhyOc6nOJ7i8AJ9P8dl30OzlovYvCJ60zg/viewform",
+      "_blank"
+    )
+  }
+                                    >
                                         Apply for Coaching
                                         <ArrowRight className="ml-2 h-5 w-5" />
                                     </Button>
-                                    <Button variant="outline" size="lg">
+                                    <Button variant="outline" size="lg"
+                                        onClick={() =>
+    window.open(
+      "https://docs.google.com/forms/d/e/1FAIpQLSfragX8BIMhxvgkFhyOc6nOJ7i8AJ9P8dl30OzlovYvCJ60zg/viewform",
+      "_blank"
+    )
+  }
+                                    >
                                         Become a Volunteer Coach
                                     </Button>
                                 </div>
