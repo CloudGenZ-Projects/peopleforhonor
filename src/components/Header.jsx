@@ -44,9 +44,13 @@ const Header = () => {
                             </NavLink>
                         ))}
                         <Button className="bg-gradient-primary hover:bg-primary-hover">
-                            <Link to="/programs">
+                            <a
+                                href="https://www.zeffy.com/en-CA/donation-form/people-for-honor-donate"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
                                 Donate
-                            </Link>
+                            </a>
                         </Button>
                     </div>
 
