@@ -1,12 +1,11 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
-import { Heart, Users, Target, Award, Play } from "lucide-react";
+import { Heart, Users, Target, Award, Quote, Compass, HeartHandshake, Gift } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import francisImg from "@/assets/Francis_Ukposidolo.jpeg";
 
 const About = () => {
-    const [isVideoPlaying, setIsVideoPlaying] = useState(false);
     const values = [
         {
             icon: Heart,
@@ -51,65 +50,98 @@ const About = () => {
                 {/* The Founder's Story */}
                 <section className="py-16">
                     <div className="container mx-auto px-4">
-                        <div className="max-w-4xl mx-auto">
-                                {/* Image 1 */}
-                                <img
-                                    src="./aboutUs.jpg"
-                                    alt="People for Honor coaching"
-                                    className="w-full h-80 object-cover rounded-xl shadow-medium"
-                                />
+                        <div className="max-w-4xl mx-auto space-y-8">
+                            {/* Image 1 */}
+                            <img
+                                src="./aboutUs.jpg"
+                                alt="People for Honor coaching"
+                                className="w-full h-80 object-cover rounded-xl shadow-medium"
+                            />
 
-                            <Card className="p-8 bg-gradient-card border-0 shadow-medium">
-                                <h2 className="text-heading text-foreground mb-6">The Founder's Story</h2>
-                                <div className="space-y-4 text-muted-foreground">
-                                    <p className="text-lg leading-relaxed">
-                                        Mr. Francis is a well-established businessman with a master's degree in engineering who made Canada his home years ago. As a newcomer, he learned firsthand how complex migration can be—navigating new systems, accents, workplace culture, and unfamiliar terrain. Those early experiences shaped a simple conviction: <strong className="text-foreground">no one should have to do it alone.</strong>
-                                    </p>
-                                    <p className="text-lg leading-relaxed">
-                                        Seeing friends and neighbours face the same hurdles, Mr. Francis set out to build a community space where people, new immigrants in particular, could find practical support without judgment. That vision became People for Honor: a welcoming hub where newcomers access guidance, skills, and encouragement to move forward with confidence.
-                                    </p>
-                                    <p className="text-lg leading-relaxed">
-                                        For Mr. Francis, Canada is a home away from home—a place that invited him to contribute and belong. He believes true belonging comes from being empowered with knowledge, grounded in cultural pride, and committed to giving back. Under his leadership, People for Honor pairs hands-on programs with a culture of dignity: we listen first, remove barriers, and celebrate every milestone, from a first résumé to a first promotion.
-                                    </p>
-                                    <p className="text-lg leading-relaxed">
-                                        Proudly Nigerian-Canadian, Mr. Francis measures success not just by individual outcomes but by what we build together—strong families, connected neighbourhoods, and opportunities that last. His aim is a living legacy: communities of belonging and fully empowered people who will lift the next generation, just as others once lifted him.
-                                    </p>
+                            <Card className="p-8 md:p-12 bg-gradient-card border-0 shadow-medium">
+                                <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-semibold mb-4">
+                                    <Award className="h-4 w-4" />
+                                    <span>Leadership & Vision</span>
+                                </div>
+                                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-8">
+                                    Founder’s Story
+                                </h2>
 
-                                    <div className="mt-8 rounded-xl overflow-hidden shadow-medium">
-                                        <div className="aspect-video bg-muted">
-                                            {!isVideoPlaying ? (
-                                                <div
-                                                    className="relative w-full h-full group cursor-pointer"
-                                                    onClick={() => setIsVideoPlaying(true)}
-                                                >
-                                                    <img
-                                                        src={`https://img.youtube.com/vi/5tB9-1W31Bg/maxresdefault.jpg`}
-                                                        alt="People for Honor Video"
-                                                        className="w-full h-full object-cover"
-                                                    />
-                                                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors duration-300 flex items-center justify-center">
-                                                        <div className="relative">
-                                                            <div className="absolute inset-0 bg-primary rounded-full animate-ping opacity-75"></div>
-                                                            <Button
-                                                                size="lg"
-                                                                className="relative bg-primary hover:bg-primary-hover text-primary-foreground rounded-full w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center shadow-xl hover:scale-110 transition-transform duration-300"
-                                                            >
-                                                                <Play className="h-8 w-8 sm:h-10 sm:w-10 ml-1" fill="currentColor" />
-                                                            </Button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            ) : (
-                                                <iframe
-                                                    className="w-full h-full"
-                                                    src="https://www.youtube.com/embed/5tB9-1W31Bg?autoplay=1&rel=0"
-                                                    title="People for Honor Video"
-                                                    frameBorder="0"
-                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                    allowFullScreen
-                                                ></iframe>
-                                            )}
+                                {/* Section 1: From Aeronautical Engineer to Community Builder */}
+                                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-10">
+                                    <div className="lg:col-span-7 space-y-4">
+                                        <h3 className="text-xl md:text-2xl font-bold text-foreground">
+                                            From Aeronautical Engineer to Community Builder
+                                        </h3>
+                                        <p className="text-lg leading-relaxed text-muted-foreground">
+                                            Mr. Francis Ukposidolo is an established businessman, a certified third-party Lead Auditor, and a specialized quality management consultant within the aerospace, marine, and heavy machinery sectors. Grounded in a robust background in aeronautical engineering, Mr. Ukposidolo successfully transitioned his professional practice to Canada Our several years ago.
+                                        </p>
+                                        <p className="text-lg leading-relaxed text-muted-foreground">
+                                            Despite his technical expertise, he experienced firsthand the complex hurdles of migration—from navigating unfamiliar institutional systems to adapting to a new workplace culture. These early challenges shaped his deeply held conviction that no newcomer should have to walk this path alone.
+                                        </p>
+                                    </div>
+
+                                    <div className="lg:col-span-5">
+                                        {/* Founder Portrait replacing Video */}
+                                        <div className="relative rounded-2xl overflow-hidden shadow-strong border border-border/50 bg-muted/30 group">
+                                            <img
+                                                src={francisImg}
+                                                alt="Mr. Francis Ukposidolo - Founder of People for Honor"
+                                                className="w-full h-[360px] sm:h-[400px] object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent"></div>
+                                            <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                                                <h4 className="text-xl font-bold">Mr. Francis Ukposidolo</h4>
+                                                <p className="text-sm text-white/90 font-medium mt-1">
+                                                    Founder & Community Builder
+                                                </p>
+                                                <p className="text-xs text-white/75 mt-0.5">
+                                                    Aeronautical Engineer | Certified Lead Auditor
+                                                </p>
+                                            </div>
                                         </div>
+                                    </div>
+                                </div>
+
+                                {/* Section 2: A Mission Rooted in Purpose and Impact */}
+                                <div className="space-y-4 mb-10">
+                                    <h3 className="text-xl md:text-2xl font-bold text-foreground">
+                                        A Mission Rooted in Purpose and Impact
+                                    </h3>
+                                    <p className="text-lg leading-relaxed text-muted-foreground">
+                                        Moving from personal experience to community action, Mr. Ukposidolo founded People for Honor. What began as a personal mission to help friends and neighbours has grown into a vital community hub.
+                                    </p>
+                                    <p className="text-lg leading-relaxed text-muted-foreground">
+                                        Under his visionary leadership, the organization goes beyond basic resettlement assistance. People for Honor focuses on holistic empowerment: helping individuals discover the best version of themselves, coaching them to uncover their true purpose, and mentoring them to fulfill that purpose.
+                                    </p>
+                                </div>
+
+                                {/* Section 3: The Power of Giving Back */}
+                                <div className="space-y-6">
+                                    <h3 className="text-xl md:text-2xl font-bold text-foreground">
+                                        The Power of Giving Back
+                                    </h3>
+                                    <p className="text-lg leading-relaxed text-muted-foreground">
+                                        For Mr. Ukposidolo, true belonging comes from being empowered with knowledge, staying grounded in cultural pride, and giving back to the community. He operates under a simple, profound guiding philosophy:
+                                    </p>
+
+                                    {/* Quote Callout */}
+                                    <div className="my-8 relative overflow-hidden rounded-xl bg-gradient-primary p-8 text-primary-foreground shadow-medium">
+                                        <Quote className="h-12 w-12 opacity-20 absolute top-4 right-4" />
+                                        <p className="text-2xl md:text-3xl font-bold italic tracking-wide text-center">
+                                            "Life is not about duration, but donation."
+                                        </p>
+                                    </div>
+
+                                    <p className="text-lg leading-relaxed text-muted-foreground">
+                                        Through People for Honor, he ensures every individual is met with unwavering dignity. The organization proudly supports newcomers at every stage of their Canadian journey by providing practical guidance, holistic skills training, and purposeful mentorship rooted in dignity and from writing their very first résumé to celebrating their first major workplace promotion. Proudly Nigerian-Canadian, Mr. Francis measures success not just by individual outcomes but by what we build together—strong families, connected neighbourhoods, and opportunities that last. His aim is a living legacy: communities of belonging and fully empowered people who will lift the next generation, just as others once lifted him.
+                                    </p>
+
+                                    {/* Concluding Legacy Quote */}
+                                    <div className="mt-8 p-6 rounded-xl bg-primary/5 border-l-4 border-primary">
+                                        <p className="text-lg md:text-xl font-semibold text-foreground italic">
+                                            "Together we plant a tree, others water the tree, and the next generation enjoys the shade."
+                                        </p>
                                     </div>
                                 </div>
                             </Card>
@@ -152,57 +184,52 @@ const About = () => {
                     </div>
                 </section>
 
-                {/* Mission Statement */}
-                <section className="py-16">
+                {/* Our Mission & Vision */}
+                <section className="py-20">
                     <div className="container mx-auto px-4">
                         <div className="max-w-4xl mx-auto">
-                            <Card className="p-8 md:p-12 bg-gradient-card border-0 shadow-medium">
-                                <div className="text-center">
-                                    <h2 className="text-heading text-foreground mb-2">Our Mission</h2>
-                                    <p className="text-lg font-semibold text-foreground mb-6">Empowering Lives, Restoring Hope</p>
-                                    <p className="text-lg leading-relaxed text-muted-foreground mb-8">
-                                        Our mission is to equip individuals with the tools, support, and resources to overcome challenges,
-                                        achieve their goals, and build a brighter future in Canada. We recognize the strength, purpose, and
-                                        potential each person carries, and we walk alongside them as they rebuild, rediscover, and rise into
-                                        the best version of themselves with dignity, not just survival.
-                                    </p>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
-                                        <div className="flex items-start gap-3">
-                                            <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
-                                            <p className="text-muted-foreground">Assisting in setting goals for your life in Canada</p>
-                                        </div>
-                                        <div className="flex items-start gap-3">
-                                            <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
-                                            <p className="text-muted-foreground">Working with you to take control of your life</p>
-                                        </div>
-                                        <div className="flex items-start gap-3">
-                                            <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
-                                            <p className="text-muted-foreground">Connecting you with experienced mentors and coaches</p>
-                                        </div>
-                                        <div className="flex items-start gap-3">
-                                            <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
-                                            <p className="text-muted-foreground">Supporting you to live a life of honor in Canada</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </Card>
-                        </div>
-                    </div>
-                </section>
+                            <div className="text-center mb-12">
+                                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                                    Our Mission & Vision
+                                </h2>
+                                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                                    Guiding every step of our journey as we empower newcomers and build communities of belonging.
+                                </p>
+                            </div>
 
-                {/* Our Vision */}
-                <section className="py-20 bg-muted/30">
-                    <div className="container mx-auto px-4">
-                        <div className="max-w-4xl mx-auto">
-                            <Card className="p-8 md:p-12 bg-gradient-card border-0 shadow-strong">
-                                <div className="text-center">
-                                    <h2 className="text-heading text-foreground mb-6">Our Vision</h2>
-                                    <p className="text-xl leading-relaxed text-muted-foreground">
-                                        A safe, welcoming space where people continuously learn and grow, feel empowered to take
-                                        the next step, and can always show up as their full selves.
-                                    </p>
-                                </div>
-                            </Card>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                {/* Mission Card */}
+                                <Card className="p-8 bg-gradient-card border-0 shadow-medium flex flex-col justify-between hover:shadow-strong transition-all duration-300">
+                                    <div>
+                                        <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-6">
+                                            <Target className="h-7 w-7 text-primary" />
+                                        </div>
+                                        <h3 className="text-2xl font-bold text-foreground mb-4">Our Mission</h3>
+                                        <p className="text-lg leading-relaxed text-muted-foreground">
+                                            To remove systemic barriers for newcomers by providing practical guidance, holistic skills training, and purposeful mentorship rooted in dignity.
+                                        </p>
+                                    </div>
+                                    <div className="mt-8 pt-6 border-t border-border/50 flex items-center gap-2 text-sm font-semibold text-primary">
+                                        <span>Empowering Lives, Restoring Hope</span>
+                                    </div>
+                                </Card>
+
+                                {/* Vision Card */}
+                                <Card className="p-8 bg-gradient-card border-0 shadow-medium flex flex-col justify-between hover:shadow-strong transition-all duration-300">
+                                    <div>
+                                        <div className="w-14 h-14 bg-secondary/10 rounded-2xl flex items-center justify-center mb-6">
+                                            <Heart className="h-7 w-7 text-secondary" />
+                                        </div>
+                                        <h3 className="text-2xl font-bold text-foreground mb-4">Our Vision</h3>
+                                        <p className="text-lg leading-relaxed text-muted-foreground">
+                                            To build an inclusive society where every immigrant is empowered to unlock their highest potential, celebrate their cultural pride, and confidently contribute to their new home.
+                                        </p>
+                                    </div>
+                                    <div className="mt-8 pt-6 border-t border-border/50 flex items-center gap-2 text-sm font-semibold text-secondary">
+                                        <span>A Community Where Everyone Belongs</span>
+                                    </div>
+                                </Card>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -306,18 +333,57 @@ const About = () => {
                 <section className="py-20">
                     <div className="container mx-auto px-4">
                         <div className="max-w-4xl mx-auto">
-                            <Card className="p-8 md:p-12 bg-gradient-card border-0 shadow-strong text-center">
-                                <h2 className="text-heading text-foreground mb-4">Get Involved</h2>
-                                <p className="text-lg leading-relaxed text-muted-foreground mb-6">
-                                    Ready to join us in making a difference? There are many ways to get involved with People for Honor,
-                                    from volunteering your time to making a donation or spreading the word about our work. Together,
-                                    we can create a brighter, more hopeful future for all.
-                                </p>
+                            <Card className="p-8 md:p-12 bg-gradient-card border-0 shadow-strong">
+                                <div className="text-center mb-10">
+                                    <h2 className="text-heading text-foreground mb-4">Get Involved</h2>
+                                    <p className="text-lg leading-relaxed text-muted-foreground max-w-2xl mx-auto">
+                                        We believe that true community is built together. Whether you are looking for support or want to give back, there is a place for you at People for Honor.
+                                    </p>
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                                    <div className="bg-background/60 backdrop-blur-sm p-6 rounded-xl border border-border/50 flex flex-col justify-between hover:shadow-medium transition-all duration-300">
+                                        <div>
+                                            <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
+                                                <Compass className="h-6 w-6 text-primary" />
+                                            </div>
+                                            <h3 className="text-xl font-bold text-foreground mb-3">For Newcomers</h3>
+                                            <p className="text-muted-foreground leading-relaxed text-sm">
+                                                Access judgment-free career coaching, mentorship, and practical tools to jumpstart your journey in Canada.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div className="bg-background/60 backdrop-blur-sm p-6 rounded-xl border border-border/50 flex flex-col justify-between hover:shadow-medium transition-all duration-300">
+                                        <div>
+                                            <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
+                                                <HeartHandshake className="h-6 w-6 text-primary" />
+                                            </div>
+                                            <h3 className="text-xl font-bold text-foreground mb-3">For Volunteers</h3>
+                                            <p className="text-muted-foreground leading-relaxed text-sm">
+                                                Share your professional skills, mentor a newcomer, or help us run our vital community programs.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div className="bg-background/60 backdrop-blur-sm p-6 rounded-xl border border-border/50 flex flex-col justify-between hover:shadow-medium transition-all duration-300">
+                                        <div>
+                                            <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
+                                                <Gift className="h-6 w-6 text-primary" />
+                                            </div>
+                                            <h3 className="text-xl font-bold text-foreground mb-3">For Donors</h3>
+                                            <p className="text-muted-foreground leading-relaxed text-sm">
+                                                Fuel our mission. Your financial contributions directly support resources that empower individuals to fulfill their purpose.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                                    <Button className="bg-gradient-primary hover:bg-primary-hover" asChild>
+                                    <Button className="bg-gradient-primary hover:bg-primary-hover px-8 py-6 text-base font-semibold" asChild>
                                         <a href="/join">Ways to Give</a>
                                     </Button>
-                                    <Button variant="outline" asChild>
+                                    <Button variant="outline" className="px-8 py-6 text-base font-semibold" asChild>
                                         <a href="/programs">Explore Our Programs</a>
                                     </Button>
                                 </div>
