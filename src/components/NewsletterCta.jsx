@@ -1,12 +1,23 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ExternalLink } from "lucide-react";
 import { useState } from "react";
+import { useHomePageLive } from "@/hooks/usePayloadLive";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
 
 const NewsletterCta = () => {
+    const { data: cmsData } = useHomePageLive();
+
+    const heading = cmsData?.newsletter_heading;
+    const description = cmsData?.newsletter_description;
+    const buttonText = cmsData?.newsletter_button_text;
+    const footerQuote = cmsData?.newsletter_footer_quote;
+
+    const linkText = cmsData?.newsletter_link_text;
+    const linkUrl = cmsData?.newsletter_link_url;
+
     const [formData, setFormData] = useState({
         email: '',
         name: '',
@@ -44,7 +55,7 @@ const NewsletterCta = () => {
                     type: 'success',
                     text: 'Thank you for joining us! We\'ll be in touch soon.'
                 });
-                setFormData({ email: '', name: '', interests: '' }); // Clear form
+                setFormData({ email: '', name: '', interests: '' });
             } else {
                 setMessage({
                     type: 'error',
@@ -66,10 +77,10 @@ const NewsletterCta = () => {
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="max-w-2xl mx-auto bg-gradient-card rounded-2xl p-8 sm:p-10 border border-border/50 shadow-medium">
                     <div className="text-center mb-6">
-                        <h2 className="text-heading text-foreground mb-3">Join the Transformational Journey!</h2>
-                        <p className="text-muted-foreground">
-                            Stay connected with our community and be the first to know about new programs, events, and opportunities to make a difference.
-                        </p>
+                        {heading && <h2 className="text-heading text-foreground mb-3">{heading}</h2>}
+                        {description && (
+                            <p className="text-muted-foreground">{description}</p>
+                        )}
                     </div>
 
                     <form onSubmit={handleSubmit} className="space-y-4">
@@ -117,14 +128,30 @@ const NewsletterCta = () => {
                             className="w-full bg-gradient-primary hover:bg-primary-hover"
                             disabled={isSubmitting}
                         >
-                            {isSubmitting ? 'Submitting...' : 'Join Our Community'}
+                            {isSubmitting ? 'Submitting...' : buttonText || 'Join Our Community'}
                             <ArrowRight className="ml-2 h-4 w-4" />
                         </Button>
                     </form>
 
-                    <p className="text-xs text-muted-foreground text-center mt-4">
-                        <em>Contribute to the prosperity of people!</em>
-                    </p>
+                    {linkText && linkUrl && (
+                        <div className="mt-6 text-center pt-4 border-t border-border/40">
+                            <a
+                                href={linkUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
+                            >
+                                {linkText}
+                                <ExternalLink className="h-4 w-4" />
+                            </a>
+                        </div>
+                    )}
+
+                    {footerQuote && (
+                        <p className="text-xs text-muted-foreground text-center mt-4">
+                            <em>{footerQuote}</em>
+                        </p>
+                    )}
                 </div>
             </div>
         </section>

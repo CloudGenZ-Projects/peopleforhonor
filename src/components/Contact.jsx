@@ -5,34 +5,50 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Phone, Mail, MapPin, Clock, Send, Heart } from "lucide-react";
 import { useState } from "react";
+import { useHomePageLive } from "@/hooks/usePayloadLive";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
 
 const Contact = () => {
+    const { data: cmsData } = useHomePageLive();
+
+    const heading = cmsData?.contact_heading;
+    const description = cmsData?.contact_description;
+    const phone = cmsData?.contact_phone;
+    const email = cmsData?.contact_email;
+    const address = cmsData?.contact_address;
+    const hours = cmsData?.contact_hours;
+
+    const boxTitle = cmsData?.contact_box_title;
+    const boxText = cmsData?.contact_box_text;
+
+    const zeffyEmbed1 = cmsData?.zeffy_embed_1_url;
+    const zeffyEmbed2 = cmsData?.zeffy_embed_2_url;
+
     const contactInfo = [
         {
             icon: Phone,
             title: "Call Us",
-            details: "613 672 7062",
-            description: "Mon - Fri: 9:00 AM - 6:00 PM"
+            details: phone,
+            description: hours
         },
         {
             icon: Mail,
             title: "Email Us",
-            details: "info@peopleforhonor.com",
+            details: email,
             description: "We'll respond within 24 hours"
         },
         {
             icon: MapPin,
             title: "Mailing Address Only – programs are not delivered at this location",
-            details: "1505 laperrieve Ave Suite 506",
-            description: "Ottawa, ON, K127T1"
+            details: address,
+            description: ""
         },
         {
             icon: Clock,
             title: "Office Hours",
-            details: "Monday - Friday",
-            description: "9:00 AM - 6:00 PM"
+            details: hours,
+            description: ""
         }
     ];
 
@@ -93,13 +109,16 @@ const Contact = () => {
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
                 <div className="text-center mb-10 sm:mb-12 lg:mb-16 animate-fade-in">
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3 sm:mb-4 px-4">
-                        Ready to Start Your Journey?
-                    </h2>
-                    <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
-                        We're here to help you every step of the way. Reach out to us and let's begin
-                        building your bright future in Canada together.
-                    </p>
+                    {heading && (
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3 sm:mb-4 px-4">
+                            {heading}
+                        </h2>
+                    )}
+                    {description && (
+                        <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
+                            {description}
+                        </p>
+                    )}
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
@@ -107,6 +126,7 @@ const Contact = () => {
                     <div className="lg:col-span-1 space-y-4 sm:space-y-6 animate-slide-up">
                         {contactInfo.map((item, index) => {
                             const Icon = item.icon;
+                            if (!item.details) return null;
                             return (
                                 <Card
                                     key={index}
@@ -125,9 +145,11 @@ const Contact = () => {
                                                 <p className="text-sm sm:text-base text-foreground font-medium mb-1 break-words">
                                                     {item.details}
                                                 </p>
-                                                <p className="text-xs sm:text-sm text-muted-foreground">
-                                                    {item.description}
-                                                </p>
+                                                {item.description && (
+                                                    <p className="text-xs sm:text-sm text-muted-foreground">
+                                                        {item.description}
+                                                    </p>
+                                                )}
                                             </div>
                                         </div>
                                     </CardContent>
@@ -135,19 +157,22 @@ const Contact = () => {
                             );
                         })}
 
-                        {/* Additional Info */}
-                        <Card className="bg-gradient-primary border-0 shadow-medium">
-                            <CardContent className="p-4 sm:p-6 text-center">
-                                <Heart className="h-6 w-6 sm:h-8 sm:w-8 text-primary-foreground mx-auto mb-3 sm:mb-4" />
-                                <h3 className="text-base sm:text-lg font-bold text-primary-foreground mb-2">
-                                    We're Here for You
-                                </h3>
-                                <p className="text-primary-foreground/90 text-xs sm:text-sm">
-                                    Your success is our mission. Don't hesitate to reach out -
-                                    we're committed to supporting your journey in Canada.
-                                </p>
-                            </CardContent>
-                        </Card>
+                        {/* Additional Support Info Box */}
+                        {boxTitle && (
+                            <Card className="bg-gradient-primary border-0 shadow-medium">
+                                <CardContent className="p-4 sm:p-6 text-center">
+                                    <Heart className="h-6 w-6 sm:h-8 sm:w-8 text-primary-foreground mx-auto mb-3 sm:mb-4" />
+                                    <h3 className="text-base sm:text-lg font-bold text-primary-foreground mb-2">
+                                        {boxTitle}
+                                    </h3>
+                                    {boxText && (
+                                        <p className="text-primary-foreground/90 text-xs sm:text-sm">
+                                            {boxText}
+                                        </p>
+                                    )}
+                                </CardContent>
+                            </Card>
+                        )}
                     </div>
 
                     {/* Contact Form */}
@@ -278,62 +303,68 @@ const Contact = () => {
                     </div>
                 </div>
 
-                {/* Newsletter Signup */}
-                <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <Card className="bg-gradient-card border-0 shadow-medium">
-                        <CardHeader>
-                            <CardTitle className="text-lg sm:text-xl font-semibold text-foreground">
-                                Sign Up to Our Newsletter
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <div className="relative w-full h-56 rounded-lg overflow-hidden bg-muted">
-                                <iframe
-                                    title="Signup form powered by Zeffy - Sign Up to Our Newsletter"
-                                    style={{
-                                        position: 'absolute',
-                                        border: 0,
-                                        top: 0,
-                                        left: 0,
-                                        bottom: 0,
-                                        right: 0,
-                                        width: '100%',
-                                        height: '100%'
-                                    }}
-                                    src="https://www.zeffy.com/en-CA/embed/newsletter-form/sign-up-for-our-newsletter-1932"
-                                    allowTransparency="true"
-                                />
-                            </div>
-                        </CardContent>
-                    </Card>
+                {/* Zeffy Embed Forms */}
+                {(zeffyEmbed1 || zeffyEmbed2) && (
+                    <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {zeffyEmbed1 && (
+                            <Card className="bg-gradient-card border-0 shadow-medium">
+                                <CardHeader>
+                                    <CardTitle className="text-lg sm:text-xl font-semibold text-foreground">
+                                        Sign Up to Our Newsletter
+                                    </CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <div className="relative w-full h-56 rounded-lg overflow-hidden bg-muted">
+                                        <iframe
+                                            title="Signup form powered by Zeffy - Sign Up to Our Newsletter"
+                                            style={{
+                                                position: 'absolute',
+                                                border: 0,
+                                                top: 0,
+                                                left: 0,
+                                                bottom: 0,
+                                                right: 0,
+                                                width: '100%',
+                                                height: '100%'
+                                            }}
+                                            src={zeffyEmbed1}
+                                            allowTransparency="true"
+                                        />
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        )}
 
-                    <Card className="bg-gradient-card border-0 shadow-medium">
-                        <CardHeader>
-                            <CardTitle className="text-lg sm:text-xl font-semibold text-foreground">
-                                Join Our Mailing List
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <div className="relative w-full h-56 rounded-lg overflow-hidden bg-muted">
-                                <iframe
-                                    title="Signup form powered by Zeffy - Join Our Mailing List"
-                                    style={{
-                                        position: 'absolute',
-                                        border: 0,
-                                        top: 0,
-                                        left: 0,
-                                        bottom: 0,
-                                        right: 0,
-                                        width: '100%',
-                                        height: '100%'
-                                    }}
-                                    src="https://www.zeffy.com/en-CA/embed/newsletter-form/join-our-mailing-list-18"
-                                    allowTransparency="true"
-                                />
-                            </div>
-                        </CardContent>
-                    </Card>
-                </div>
+                        {zeffyEmbed2 && (
+                            <Card className="bg-gradient-card border-0 shadow-medium">
+                                <CardHeader>
+                                    <CardTitle className="text-lg sm:text-xl font-semibold text-foreground">
+                                        Join Our Mailing List
+                                    </CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <div className="relative w-full h-56 rounded-lg overflow-hidden bg-muted">
+                                        <iframe
+                                            title="Signup form powered by Zeffy - Join Our Mailing List"
+                                            style={{
+                                                position: 'absolute',
+                                                border: 0,
+                                                top: 0,
+                                                left: 0,
+                                                bottom: 0,
+                                                right: 0,
+                                                width: '100%',
+                                                height: '100%'
+                                            }}
+                                            src={zeffyEmbed2}
+                                            allowTransparency="true"
+                                        />
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        )}
+                    </div>
+                )}
             </div>
         </section>
     );

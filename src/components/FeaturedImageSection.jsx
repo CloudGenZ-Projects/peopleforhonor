@@ -2,10 +2,26 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useHomePageLive } from "@/hooks/usePayloadLive";
+import { getYouTubeVideoId } from "@/services/payloadApi";
 
 const FeaturedImageSection = () => {
     const [isPlaying, setIsPlaying] = useState(false);
-    const videoId = "MlBTjyV_ado";
+    const { data } = useHomePageLive();
+
+    const badge = data?.featured_badge;
+    const heading = data?.featured_heading;
+    const p1 = data?.featured_paragraph_1;
+    const p2 = data?.featured_paragraph_2;
+
+    const primaryText = data?.featured_primary_cta_text;
+    const primaryLink = data?.featured_primary_cta_link;
+
+    const secondaryText = data?.featured_secondary_cta_text;
+    const secondaryLink = data?.featured_secondary_cta_link;
+
+    const rawVideoInput = data?.featured_video_id || "https://www.youtube.com/watch?v=MlBTjyV_ado";
+    const videoId = getYouTubeVideoId(rawVideoInput);
 
     const handlePlayClick = () => {
         setIsPlaying(true);
@@ -18,38 +34,46 @@ const FeaturedImageSection = () => {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                         {/* Content - Left Side */}
                         <div className="animate-slide-up">
-                            <div className="inline-flex items-center gap-2 bg-primary/10 rounded-full px-4 py-2 mb-4">
-                                <span className="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
-                                <span className="text-primary text-sm font-medium">Building Community</span>
-                            </div>
+                            {badge && (
+                                <div className="inline-flex items-center gap-2 bg-primary/10 rounded-full px-4 py-2 mb-4">
+                                    <span className="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
+                                    <span className="text-primary text-sm font-medium">{badge}</span>
+                                </div>
+                            )}
 
-                            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4 sm:mb-6">
-                                Do more than survive in Canada!
-                            </h2>
+                            {heading && (
+                                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4 sm:mb-6">
+                                    {heading}
+                                </h2>
+                            )}
 
-                            <p className="text-base sm:text-lg text-muted-foreground mb-6 leading-relaxed">
-                                At People for Honor, our values guide our actions and shape our organizational culture.
-                                We believe that everyone has the inherent potential to thrive and live a fulfilled life,
-                                and that knowing your own worth enables you to better value others.
-                            </p>
+                            {p1 && (
+                                <p className="text-base sm:text-lg text-muted-foreground mb-6 leading-relaxed">
+                                    {p1}
+                                </p>
+                            )}
 
-                            <p className="text-base sm:text-lg text-muted-foreground mb-8 leading-relaxed">
-                                We hold that giving back to your community not only strengthens those around you but
-                                also helps you to flourish personally. Above all, we recognize that we are all connected—sowing
-                                seeds today so that future generations may water the trees, and their descendants may one day
-                                rest in the shade they provide.
-                            </p>
+                            {p2 && (
+                                <p className="text-base sm:text-lg text-muted-foreground mb-8 leading-relaxed">
+                                    {p2}
+                                </p>
+                            )}
 
                             <div className="flex flex-col sm:flex-row gap-4">
-                                <Button asChild size="lg" className="bg-gradient-primary hover:bg-primary-hover">
-                                    <Link to="/programs">
-                                        Explore Our Programs
-                                        <ArrowRight className="ml-2 h-5 w-5" />
-                                    </Link>
-                                </Button>
-                                <Button asChild size="lg" variant="outline">
-                                    <Link to="/about">Learn More About Us</Link>
-                                </Button>
+                                {primaryText && primaryLink && (
+                                    <Button asChild size="lg" className="bg-gradient-primary hover:bg-primary-hover">
+                                        <Link to={primaryLink}>
+                                            {primaryText}
+                                            <ArrowRight className="ml-2 h-5 w-5" />
+                                        </Link>
+                                    </Button>
+                                )}
+
+                                {secondaryText && secondaryLink && (
+                                    <Button asChild size="lg" variant="outline">
+                                        <Link to={secondaryLink}>{secondaryText}</Link>
+                                    </Button>
+                                )}
                             </div>
                         </div>
 
@@ -62,7 +86,7 @@ const FeaturedImageSection = () => {
                                         <div className="relative w-full h-full group cursor-pointer" onClick={handlePlayClick}>
                                             <img
                                                 src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
-                                                alt="Do more than survive in Canada"
+                                                alt={heading || "Do more than survive in Canada"}
                                                 className="w-full h-full object-cover"
                                             />
                                             <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors duration-300 flex items-center justify-center">
@@ -82,7 +106,7 @@ const FeaturedImageSection = () => {
                                         <iframe
                                             className="w-full h-full"
                                             src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`}
-                                            title="Do more than survive in Canada"
+                                            title={heading || "Do more than survive in Canada"}
                                             frameBorder="0"
                                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                             allowFullScreen
