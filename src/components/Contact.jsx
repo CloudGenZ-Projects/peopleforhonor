@@ -12,18 +12,18 @@ const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
 const Contact = () => {
     const { data: cmsData } = useHomePageLive();
 
-    const heading = cmsData?.contact_heading;
-    const description = cmsData?.contact_description;
-    const phone = cmsData?.contact_phone;
-    const email = cmsData?.contact_email;
-    const address = cmsData?.contact_address;
-    const hours = cmsData?.contact_hours;
+    const heading = cmsData?.contact_heading || "Get in Touch";
+    const description = cmsData?.contact_description || "Have questions about our programs or want to get involved? We'd love to hear from you. Fill out the form below or reach out directly.";
+    const phone = cmsData?.contact_phone || "613 672 7062";
+    const email = cmsData?.contact_email || "info@peopleforhonor.com";
+    const address = cmsData?.contact_address || "1505 laperrieve Ave Suite 506, Ottawa, ON, K127T1";
+    const hours = cmsData?.contact_hours || "Monday - Friday: 9:00 AM - 6:00 PM";
 
-    const boxTitle = cmsData?.contact_box_title;
-    const boxText = cmsData?.contact_box_text;
+    const boxTitle = cmsData?.contact_box_title || "We're Here for You";
+    const boxText = cmsData?.contact_box_text || "Your success is our mission. Don't hesitate to reach out - we're committed to supporting your journey in Canada.";
 
-    const zeffyEmbed1 = cmsData?.zeffy_embed_1_url;
-    const zeffyEmbed2 = cmsData?.zeffy_embed_2_url;
+    const zeffyEmbed1 = cmsData?.zeffy_embed_1_url || "https://www.zeffy.com/en-CA/embed/newsletter-form/sign-up-for-our-newsletter-1932";
+    const zeffyEmbed2 = cmsData?.zeffy_embed_2_url || "https://www.zeffy.com/en-CA/embed/newsletter-form/join-our-mailing-list-18";
 
     const contactInfo = [
         {
