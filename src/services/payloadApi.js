@@ -56,6 +56,44 @@ export async function getAboutPageData() {
 }
 
 /**
+ * Fetch ProgramsPage Global data from Payload CMS
+ */
+export async function getProgramsPageData() {
+  try {
+    const res = await fetch(`${CMS_URL}/api/globals/programs-page?depth=2`)
+    if (!res.ok) {
+      throw new Error(`Failed to fetch programs page data: ${res.statusText}`)
+    }
+    const data = await res.json()
+    populateMediaCache(data)
+    return data
+  } catch (error) {
+    console.error('Error fetching ProgramsPage data from Payload CMS:', error)
+    return null
+  }
+}
+
+/**
+ * Fetch individual Program Detail by slug from Payload CMS Collection
+ */
+export async function getProgramDetailBySlug(slug) {
+  if (!slug) return null
+  try {
+    const res = await fetch(`${CMS_URL}/api/program-details?where[slug][equals]=${encodeURIComponent(slug)}&depth=2`)
+    if (!res.ok) {
+      throw new Error(`Failed to fetch program detail for ${slug}: ${res.statusText}`)
+    }
+    const data = await res.json()
+    const doc = data.docs && data.docs.length > 0 ? data.docs[0] : null
+    if (doc) populateMediaCache(doc)
+    return doc
+  } catch (error) {
+    console.error(`Error fetching ProgramDetail for ${slug}:`, error)
+    return null
+  }
+}
+
+/**
  * Extracts YouTube Video ID from any full YouTube URL or raw ID
  */
 export function getYouTubeVideoId(urlOrId) {

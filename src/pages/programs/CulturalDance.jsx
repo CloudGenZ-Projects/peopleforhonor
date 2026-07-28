@@ -3,50 +3,46 @@ import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Music, Users, Calendar, DollarSign, Heart, ArrowRight, CheckCircle2, Smile, TrendingUp, Globe } from "lucide-react";
+import { Music, Users, Calendar, DollarSign, Award, Clock, ArrowRight, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useProgramDetailLive } from "@/hooks/usePayloadLive";
+
+const safeText = (val) => {
+    if (!val) return '';
+    if (typeof val === 'string') return val;
+    if (typeof val === 'object') return val.text || val.title || val.content || '';
+    return String(val);
+};
 
 const CulturalDance = () => {
-    const whyItMatters = [
-        {
-            icon: Heart,
-            title: "Stress relief & mental health",
-            description: "Rhythmic movement doubles as meditation—reducing stress and improving mood for newcomers and longtime residents alike."
-        },
-        {
-            icon: Smile,
-            title: "Confidence, mobility, and joy",
-            description: "Low-impact movement builds balance, flexibility, and self-esteem in a safe, judgment-free space."
-        },
-        {
-            icon: Globe,
-            title: "Belonging across cultures",
-            description: "Shared music and stories foster social connection, reduce isolation, and strengthen intercultural understanding."
-        },
-        {
-            icon: TrendingUp,
-            title: "Low-barrier access",
-            description: "Free, equipment-free, and led by trained facilitators; participants can join at any level and feel successful from day one."
-        }
-    ];
+    const { data } = useProgramDetailLive('cultural-dance');
 
-    const sessionFlow = [
-        {
-            step: 1,
-            title: "Gentle warm-up and breathwork",
-            description: "Start with mindful breathing and gentle stretches"
-        },
-        {
-            step: 2,
-            title: "Learn foundational steps & cultural context",
-            description: "Discover the stories and traditions behind the movements"
-        },
-        {
-            step: 3,
-            title: "Group choreography & cool-down reflection",
-            description: "Dance together and reflect on the experience"
-        }
-    ];
+    const badge = data?.badge;
+    const title = data?.title;
+    const heroSubtitle = data?.hero_subtitle;
+
+    const duration = data?.duration;
+    const capacity = data?.capacity;
+    const cost = data?.cost;
+
+    const whoCanJoin = data?.who_can_join;
+    const detailsCapacity = data?.details_capacity;
+    const schedule = data?.schedule;
+    const detailsCost = data?.details_cost;
+    const leadInstructor = data?.lead_instructor;
+
+    const learningOutcomes = data?.learning_outcomes || [];
+    const takeawayTitle = data?.takeaway_title;
+    const takeawayText = data?.takeaway_text;
+
+    const curriculumTitle = data?.curriculum_title;
+    const weeks = data?.weeks || [];
+    const commitmentNote = data?.commitment_note;
+
+    const ctaHeading = data?.cta_heading;
+    const ctaDescription = data?.cta_description;
+    const registerButtonText = data?.register_button_text;
+    const registerButtonUrl = data?.register_button_url;
 
     return (
         <div className="min-h-screen">
@@ -56,30 +52,33 @@ const CulturalDance = () => {
                 <section className="py-20 bg-gradient-primary text-primary-foreground">
                     <div className="container mx-auto px-4">
                         <div className="max-w-4xl mx-auto text-center">
-                            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-4">
-                                <Music className="h-4 w-4" />
-                                <span className="text-sm font-medium">Culture & Community Program</span>
-                            </div>
-                            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                                Cultural Dance & Movement
-                            </h1>
-                            <p className="text-xl leading-relaxed opacity-90 mb-8">
-                                Stress relief through cultural rhythms and mindful movement. No experience needed.
-                                Build confidence, mobility, and belonging across cultures.
-                            </p>
+                            {badge && (
+                                <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-4">
+                                    <Music className="h-4 w-4" />
+                                    <span className="text-sm font-medium">{badge}</span>
+                                </div>
+                            )}
+                            {title && <h1 className="text-4xl md:text-5xl font-bold mb-6">{title}</h1>}
+                            {heroSubtitle && <p className="text-xl leading-relaxed opacity-90 mb-8">{heroSubtitle}</p>}
                             <div className="flex flex-wrap gap-3 justify-center">
-                                <Badge variant="secondary" className="text-base px-4 py-2">
-                                    <Calendar className="h-4 w-4 mr-2" />
-                                    Bi-Weekly
-                                </Badge>
-                                <Badge variant="secondary" className="text-base px-4 py-2">
-                                    <Users className="h-4 w-4 mr-2" />
-                                    20 Participants
-                                </Badge>
-                                <Badge variant="secondary" className="text-base px-4 py-2">
-                                    <DollarSign className="h-4 w-4 mr-2" />
-                                    100% Free
-                                </Badge>
+                                {duration && (
+                                    <Badge variant="secondary" className="text-base px-4 py-2">
+                                        <Calendar className="h-4 w-4 mr-2" />
+                                        {duration}
+                                    </Badge>
+                                )}
+                                {capacity && (
+                                    <Badge variant="secondary" className="text-base px-4 py-2">
+                                        <Users className="h-4 w-4 mr-2" />
+                                        {capacity}
+                                    </Badge>
+                                )}
+                                {cost && (
+                                    <Badge variant="secondary" className="text-base px-4 py-2">
+                                        <DollarSign className="h-4 w-4 mr-2" />
+                                        {cost}
+                                    </Badge>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -94,110 +93,118 @@ const CulturalDance = () => {
                                 <Card className="p-6 bg-gradient-card border-0 shadow-medium">
                                     <h3 className="text-xl font-bold text-foreground mb-4">Program Details</h3>
                                     <div className="space-y-4">
-                                        <div className="flex items-start gap-3">
-                                            <Users className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                                            <div>
-                                                <p className="font-semibold text-foreground">Who Can Join</p>
-                                                <p className="text-sm text-muted-foreground">All ages 14+ (no experience needed)</p>
+                                        {whoCanJoin && (
+                                            <div className="flex items-start gap-3">
+                                                <Users className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                                                <div>
+                                                    <p className="font-semibold text-foreground">Who Can Join</p>
+                                                    <p className="text-sm text-muted-foreground">{whoCanJoin}</p>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className="flex items-start gap-3">
-                                            <Users className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                                            <div>
-                                                <p className="font-semibold text-foreground">Capacity</p>
-                                                <p className="text-sm text-muted-foreground">20 participants per session</p>
+                                        )}
+                                        {detailsCapacity && (
+                                            <div className="flex items-start gap-3">
+                                                <Users className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                                                <div>
+                                                    <p className="font-semibold text-foreground">Capacity</p>
+                                                    <p className="text-sm text-muted-foreground">{detailsCapacity}</p>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className="flex items-start gap-3">
-                                            <Calendar className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                                            <div>
-                                                <p className="font-semibold text-foreground">Schedule</p>
-                                                <p className="text-sm text-muted-foreground">Every other Saturday, 1.5–2 hours</p>
+                                        )}
+                                        {schedule && (
+                                            <div className="flex items-start gap-3">
+                                                <Calendar className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                                                <div>
+                                                    <p className="font-semibold text-foreground">Schedule</p>
+                                                    <p className="text-sm text-muted-foreground">{schedule}</p>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className="flex items-start gap-3">
-                                            <DollarSign className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                                            <div>
-                                                <p className="font-semibold text-foreground">Cost</p>
-                                                <p className="text-sm text-muted-foreground">Free</p>
+                                        )}
+                                        {detailsCost && (
+                                            <div className="flex items-start gap-3">
+                                                <DollarSign className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                                                <div>
+                                                    <p className="font-semibold text-foreground">Cost</p>
+                                                    <p className="text-sm text-muted-foreground">{detailsCost}</p>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className="flex items-start gap-3">
+                                        )}
+                                        {leadInstructor && (
+                                            <div className="flex items-start gap-3">
                                             <Music className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                                            <div>
-                                                <p className="font-semibold text-foreground">Focus</p>
-                                                <p className="text-sm text-muted-foreground">Cultural rhythms, community, and mindful movement</p>
+                                                <div>
+                                                    <p className="font-semibold text-foreground">Focus</p>
+                                                    <p className="text-sm text-muted-foreground">{leadInstructor}</p>
+                                                </div>
                                             </div>
-                                        </div>
+                                        )}
                                     </div>
                                 </Card>
 
-                                {/* What to Bring */}
+                                {/* What You'll Learn */}
                                 <Card className="p-6 bg-gradient-card border-0 shadow-medium">
                                     <h3 className="text-xl font-bold text-foreground mb-4">What to Bring</h3>
-                                    <div className="space-y-3">
-                                        <div className="flex items-start gap-3">
-                                            <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                                            <p className="text-muted-foreground">Comfortable clothes</p>
+                                    {learningOutcomes.length > 0 && (
+                                        <div className="space-y-3">
+                                            {learningOutcomes.map((outcome, index) => {
+                                                const txt = safeText(outcome);
+                                                if (!txt) return null;
+                                                return (
+                                                    <div key={index} className="flex items-start gap-3">
+                                                        <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                                                        <p className="text-muted-foreground">{txt}</p>
+                                                    </div>
+                                                );
+                                            })}
                                         </div>
-                                        <div className="flex items-start gap-3">
-                                            <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                                            <p className="text-muted-foreground">Water bottle</p>
+                                    )}
+                                    {takeawayText && (
+                                        <div className="mt-6 p-4 bg-primary/5 rounded-lg border border-primary/20">
+                                            {takeawayTitle && (
+                                                <p className="font-semibold text-foreground mb-2 flex items-center gap-2">
+                                                    <Award className="h-5 w-5 text-primary" />
+                                                    {takeawayTitle}
+                                                </p>
+                                            )}
+                                            <p className="text-sm text-muted-foreground">{takeawayText}</p>
                                         </div>
-                                        <div className="flex items-start gap-3">
-                                            <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                                            <p className="text-muted-foreground">Open heart</p>
-                                        </div>
-                                    </div>
-                                    <div className="mt-6 p-4 bg-primary/5 rounded-lg border border-primary/20">
-                                        <p className="font-semibold text-foreground mb-2">No Experience Required</p>
-                                        <p className="text-sm text-muted-foreground">
-                                            This is a judgment-free space where everyone is welcome, regardless of skill level or background.
-                                        </p>
-                                    </div>
+                                    )}
                                 </Card>
                             </div>
 
-                            {/* Why It Matters */}
-                            <Card className="p-8 bg-gradient-card border-0 shadow-strong mb-12">
-                                <h3 className="text-2xl font-bold text-foreground mb-6 text-center">Why It Matters</h3>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    {whyItMatters.map((item, index) => {
-                                        const Icon = item.icon;
-                                        return (
-                                            <Card key={index} className="p-6 bg-background hover:shadow-medium transition-shadow">
-                                                <div className="flex items-start gap-4">
-                                                    <div className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center flex-shrink-0">
-                                                        <Icon className="h-6 w-6 text-primary-foreground" />
+                            {/* What to Expect Flow */}
+                            {weeks.length > 0 && (
+                                <Card className="p-8 bg-gradient-card border-0 shadow-strong">
+                                    {curriculumTitle && (
+                                        <h3 className="text-2xl font-bold text-foreground mb-6 text-center">{curriculumTitle}</h3>
+                                    )}
+                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                        {weeks.map((w, idx) => (
+                                            <Card key={idx} className="p-5 bg-background hover:shadow-medium transition-shadow">
+                                                <div className="flex items-center gap-3 mb-3">
+                                                    <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center flex-shrink-0">
+                                                        <span className="text-primary-foreground font-bold">{w.week || idx + 1}</span>
                                                     </div>
-                                                    <div>
-                                                        <h4 className="font-semibold text-foreground mb-2">{item.title}</h4>
-                                                        <p className="text-sm text-muted-foreground">{item.description}</p>
-                                                    </div>
+                                                    <h4 className="font-semibold text-foreground">{w.title}</h4>
                                                 </div>
+                                                <p className="text-sm text-muted-foreground">{w.content}</p>
                                             </Card>
-                                        );
-                                    })}
-                                </div>
-                            </Card>
+                                        ))}
+                                    </div>
 
-                            {/* What to Expect */}
-                            <Card className="p-8 bg-gradient-card border-0 shadow-strong">
-                                <h3 className="text-2xl font-bold text-foreground mb-6 text-center">What to Expect</h3>
-                                <div className="space-y-6">
-                                    {sessionFlow.map((item) => (
-                                        <div key={item.step} className="flex items-start gap-4 p-5 bg-background rounded-lg">
-                                            <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center flex-shrink-0">
-                                                <span className="text-primary-foreground font-bold">{item.step}</span>
-                                            </div>
-                                            <div>
-                                                <h4 className="font-semibold text-foreground mb-1">{item.title}</h4>
-                                                <p className="text-sm text-muted-foreground">{item.description}</p>
+                                    {commitmentNote && (
+                                        <div className="mt-8 p-6 bg-muted/50 rounded-lg border-l-4 border-primary">
+                                            <div className="flex items-start gap-3">
+                                                <Clock className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                                                <div>
+                                                    <p className="font-semibold text-foreground mb-1">Commitment Note</p>
+                                                    <p className="text-sm text-muted-foreground">{commitmentNote}</p>
+                                                </div>
                                             </div>
                                         </div>
-                                    ))}
-                                </div>
-                            </Card>
+                                    )}
+                                </Card>
+                            )}
                         </div>
                     </div>
                 </section>
@@ -208,23 +215,22 @@ const CulturalDance = () => {
                         <div className="max-w-3xl mx-auto">
                             <Card className="p-8 md:p-12 bg-gradient-card border-0 shadow-strong text-center">
                                 <Music className="h-12 w-12 text-primary mx-auto mb-4" />
-                                <h2 className="text-2xl font-bold text-foreground mb-4">Ready to Move & Connect?</h2>
-                                <p className="text-lg text-muted-foreground mb-8">
-                                    Join us for Cultural Dance & Movement and experience the joy of rhythmic movement,
-                                    cultural connection, and community belonging. All levels welcome!
-                                </p>
+                                {ctaHeading && <h2 className="text-2xl font-bold text-foreground mb-4">{ctaHeading}</h2>}
+                                {ctaDescription && <p className="text-lg text-muted-foreground mb-8">{ctaDescription}</p>}
                                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                                    <Button className="bg-gradient-primary hover:bg-primary-hover" size="lg"
-                                        onClick={() =>
-    window.open(
-      "https://docs.google.com/forms/d/e/1FAIpQLSfragX8BIMhxvgkFhyOc6nOJ7i8AJ9P8dl30OzlovYvCJ60zg/viewform",
-      "_blank"
-    )
-  }
-                                    >
-                                        Reserve a Spot
-                                        <ArrowRight className="ml-2 h-5 w-5" />
-                                    </Button>
+                                    {registerButtonText && (
+                                        <Button className="bg-gradient-primary hover:bg-primary-hover" size="lg"
+                                            onClick={() =>
+                                                window.open(
+                                                    registerButtonUrl || "https://docs.google.com/forms/d/e/1FAIpQLSfragX8BIMhxvgkFhyOc6nOJ7i8AJ9P8dl30OzlovYvCJ60zg/viewform",
+                                                    "_blank"
+                                                )
+                                            }
+                                        >
+                                            {registerButtonText}
+                                            <ArrowRight className="ml-2 h-5 w-5" />
+                                        </Button>
+                                    )}
                                     <Button variant="outline" size="lg" asChild>
                                         <Link to="/programs">View All Programs</Link>
                                     </Button>
