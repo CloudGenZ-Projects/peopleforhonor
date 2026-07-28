@@ -6,6 +6,7 @@ import {
   getAboutPageData,
   getProgramsPageData,
   getGalleryPageData,
+  getJoinUsPageData,
   getProgramDetailBySlug,
   populateMediaCache,
 } from '@/services/payloadApi'
@@ -248,6 +249,70 @@ export function useGalleryPageLive() {
   useEffect(() => {
     const handleMessage = (event) => {
       if (event?.data?.type === 'payload-live-preview' || event?.data?.slug === 'gallery-page') {
+        if (event.data.data) {
+          setPostMessageData(event.data.data)
+        }
+      }
+    }
+    window.addEventListener('message', handleMessage)
+    return () => window.removeEventListener('message', handleMessage)
+  }, [])
+
+  const activeData = useMemo(() => {
+    return postMessageData || liveData || initialData
+  }, [postMessageData, liveData, initialData])
+
+  return {
+    data: activeData,
+    isLoading,
+    error,
+  }
+}
+
+/**
+ * Custom hook combining TanStack React Query + Payload Live Preview for JoinUsPage
+ */
+export function useJoinUsPageLive() {
+  const [, setMediaCacheTick] = useState(0)
+
+  useEffect(() => {
+    const handleMediaCached = () => {
+      setMediaCacheTick(t => t + 1)
+    }
+    window.addEventListener('payload-media-cached', handleMediaCached)
+    return () => window.removeEventListener('payload-media-cached', handleMediaCached)
+  }, [])
+
+  const { data: initialData, isLoading, error } = useQuery({
+    queryKey: ['join-us-page-data'],
+    queryFn: getJoinUsPageData,
+    staleTime: 1000 * 60 * 5,
+    refetchOnWindowFocus: false,
+  })
+
+  useEffect(() => {
+    if (initialData) {
+      populateMediaCache(initialData)
+    }
+  }, [initialData])
+
+  const { data: liveData } = useLivePreview({
+    initialData,
+    serverURL: CMS_URL,
+    depth: 2,
+  })
+
+  useEffect(() => {
+    if (liveData) {
+      populateMediaCache(liveData)
+    }
+  }, [liveData])
+
+  const [postMessageData, setPostMessageData] = useState(null)
+
+  useEffect(() => {
+    const handleMessage = (event) => {
+      if (event?.data?.type === 'payload-live-preview' || event?.data?.slug === 'join-us-page') {
         if (event.data.data) {
           setPostMessageData(event.data.data)
         }

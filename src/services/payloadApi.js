@@ -92,6 +92,24 @@ export async function getGalleryPageData() {
 }
 
 /**
+ * Fetch JoinUsPage Global data from Payload CMS
+ */
+export async function getJoinUsPageData() {
+  try {
+    const res = await fetch(`${CMS_URL}/api/globals/join-us-page?depth=2`)
+    if (!res.ok) {
+      throw new Error(`Failed to fetch join us page data: ${res.statusText}`)
+    }
+    const data = await res.json()
+    populateMediaCache(data)
+    return data
+  } catch (error) {
+    console.error('Error fetching JoinUsPage data from Payload CMS:', error)
+    return null
+  }
+}
+
+/**
  * Fetch individual Program Detail by slug from Payload CMS Collection
  */
 export async function getProgramDetailBySlug(slug) {
