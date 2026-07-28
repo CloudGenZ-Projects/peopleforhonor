@@ -32,7 +32,7 @@ const Gallery = () => {
         const imageSrc = getMediaUrl(item.image, item.imageUrl || item.image);
         return {
             id: item.id || idx + 1,
-            title: item.title || `Gallery Image ${idx + 1}`,
+            title: item.title || '',
             category: item.category || 'gallery',
             type: 'image',
             image: imageSrc,
@@ -40,7 +40,7 @@ const Gallery = () => {
             date: item.date || '',
             location: item.location || '',
         };
-    });
+    }).filter(img => Boolean(img.image));
 
     // Process YouTube videos dynamically from Payload CMS
     const videoItems = rawVideos.map((item, idx) => {
@@ -48,7 +48,7 @@ const Gallery = () => {
         const thumbnailSrc = item.thumbnail || `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
         return {
             id: item.id || idx + 1,
-            title: item.title || 'Gallery Video',
+            title: item.title || '',
             category: item.category || 'gallery',
             type: 'video',
             thumbnail: thumbnailSrc,
@@ -58,7 +58,7 @@ const Gallery = () => {
             date: item.date || '',
             location: item.location || '',
         };
-    });
+    }).filter(vid => Boolean(vid.videoId));
 
     const renderMediaGrid = (items, isVideo = false) => (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -69,7 +69,7 @@ const Gallery = () => {
                             <div className="relative aspect-square overflow-hidden">
                                 <img
                                     src={isVideo ? item.thumbnail : item.image}
-                                    alt={item.title}
+                                    alt={item.title || 'Gallery item'}
                                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                                 />
                                 {isVideo && (
@@ -108,7 +108,7 @@ const Gallery = () => {
                                 <iframe
                                     className="w-full h-full"
                                     src={`https://www.youtube.com/embed/${item.videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}
-                                    title={item.title}
+                                    title={item.title || 'Video player'}
                                     frameBorder="0"
                                     allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                     allowFullScreen
@@ -116,7 +116,7 @@ const Gallery = () => {
                             ) : (
                                 <img
                                     src={item.image}
-                                    alt={item.title}
+                                    alt={item.title || 'Gallery image'}
                                     className="w-full h-full object-cover"
                                 />
                             )}
@@ -141,7 +141,7 @@ const Gallery = () => {
                         {items.map((item) => (
                             <div className="flex-[0_0_100%]" key={item.id}>
                                 <div className="aspect-[16/9] w-full overflow-hidden bg-muted">
-                                    <img src={item.image} alt={item.title} className="h-full w-full object-cover" />
+                                    <img src={item.image} alt={item.title || 'Gallery image'} className="h-full w-full object-cover" />
                                 </div>
                             </div>
                         ))}
@@ -243,28 +243,30 @@ const Gallery = () => {
                 </section>
 
                 {/* Call to Action */}
-                <section className="py-20 bg-muted/30">
-                    <div className="container mx-auto px-4">
-                        <div className="max-w-2xl mx-auto text-center">
-                            <Card className="p-8 bg-gradient-card border-0 shadow-strong">
-                                {ctaHeading && <h2 className="text-2xl font-bold text-foreground mb-4">{ctaHeading}</h2>}
-                                {ctaDescription && <p className="text-muted-foreground mb-6">{ctaDescription}</p>}
-                                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                                    {ctaBtn1Text && ctaBtn1Link && (
-                                        <Button className="bg-gradient-primary hover:bg-primary-hover" asChild>
-                                            <Link to={ctaBtn1Link}>{ctaBtn1Text}</Link>
-                                        </Button>
-                                    )}
-                                    {ctaBtn2Text && ctaBtn2Link && (
-                                        <Button variant="outline" asChild>
-                                            <Link to={ctaBtn2Link}>{ctaBtn2Text}</Link>
-                                        </Button>
-                                    )}
-                                </div>
-                            </Card>
+                {(ctaHeading || ctaDescription) && (
+                    <section className="py-20 bg-muted/30">
+                        <div className="container mx-auto px-4">
+                            <div className="max-w-2xl mx-auto text-center">
+                                <Card className="p-8 bg-gradient-card border-0 shadow-strong">
+                                    {ctaHeading && <h2 className="text-2xl font-bold text-foreground mb-4">{ctaHeading}</h2>}
+                                    {ctaDescription && <p className="text-muted-foreground mb-6">{ctaDescription}</p>}
+                                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                                        {ctaBtn1Text && ctaBtn1Link && (
+                                            <Button className="bg-gradient-primary hover:bg-primary-hover" asChild>
+                                                <Link to={ctaBtn1Link}>{ctaBtn1Text}</Link>
+                                            </Button>
+                                        )}
+                                        {ctaBtn2Text && ctaBtn2Link && (
+                                            <Button variant="outline" asChild>
+                                                <Link to={ctaBtn2Link}>{ctaBtn2Text}</Link>
+                                            </Button>
+                                        )}
+                                    </div>
+                                </Card>
+                            </div>
                         </div>
-                    </div>
-                </section>
+                    </section>
+                )}
             </main>
             <Footer />
         </div>
