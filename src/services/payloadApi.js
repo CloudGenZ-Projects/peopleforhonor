@@ -19,6 +19,9 @@ export function populateMediaCache(data) {
   }
 }
 
+/**
+ * Fetch HomePage Global data from Payload CMS
+ */
 export async function getHomePageData() {
   try {
     const res = await fetch(`${CMS_URL}/api/globals/home-page?depth=2`)
@@ -35,11 +38,25 @@ export async function getHomePageData() {
 }
 
 /**
+ * Fetch AboutPage Global data from Payload CMS
+ */
+export async function getAboutPageData() {
+  try {
+    const res = await fetch(`${CMS_URL}/api/globals/about-page?depth=2`)
+    if (!res.ok) {
+      throw new Error(`Failed to fetch about page data: ${res.statusText}`)
+    }
+    const data = await res.json()
+    populateMediaCache(data)
+    return data
+  } catch (error) {
+    console.error('Error fetching AboutPage data from Payload CMS:', error)
+    return null
+  }
+}
+
+/**
  * Extracts YouTube Video ID from any full YouTube URL or raw ID
- * Examples:
- * - "https://www.youtube.com/watch?v=MlBTjyV_ado" -> "MlBTjyV_ado"
- * - "https://youtu.be/MlBTjyV_ado" -> "MlBTjyV_ado"
- * - "MlBTjyV_ado" -> "MlBTjyV_ado"
  */
 export function getYouTubeVideoId(urlOrId) {
   if (!urlOrId || typeof urlOrId !== 'string') return 'MlBTjyV_ado'
