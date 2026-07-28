@@ -110,6 +110,24 @@ export async function getJoinUsPageData() {
 }
 
 /**
+ * Fetch ContactPage Global data from Payload CMS
+ */
+export async function getContactPageData() {
+  try {
+    const res = await fetch(`${CMS_URL}/api/globals/contact-page?depth=2`)
+    if (!res.ok) {
+      throw new Error(`Failed to fetch contact page data: ${res.statusText}`)
+    }
+    const data = await res.json()
+    populateMediaCache(data)
+    return data
+  } catch (error) {
+    console.error('Error fetching ContactPage data from Payload CMS:', error)
+    return null
+  }
+}
+
+/**
  * Fetch individual Program Detail by slug from Payload CMS Collection
  */
 export async function getProgramDetailBySlug(slug) {

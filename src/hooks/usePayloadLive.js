@@ -7,6 +7,7 @@ import {
   getProgramsPageData,
   getGalleryPageData,
   getJoinUsPageData,
+  getContactPageData,
   getProgramDetailBySlug,
   populateMediaCache,
 } from '@/services/payloadApi'
@@ -313,6 +314,70 @@ export function useJoinUsPageLive() {
   useEffect(() => {
     const handleMessage = (event) => {
       if (event?.data?.type === 'payload-live-preview' || event?.data?.slug === 'join-us-page') {
+        if (event.data.data) {
+          setPostMessageData(event.data.data)
+        }
+      }
+    }
+    window.addEventListener('message', handleMessage)
+    return () => window.removeEventListener('message', handleMessage)
+  }, [])
+
+  const activeData = useMemo(() => {
+    return postMessageData || liveData || initialData
+  }, [postMessageData, liveData, initialData])
+
+  return {
+    data: activeData,
+    isLoading,
+    error,
+  }
+}
+
+/**
+ * Custom hook combining TanStack React Query + Payload Live Preview for ContactPage
+ */
+export function useContactPageLive() {
+  const [, setMediaCacheTick] = useState(0)
+
+  useEffect(() => {
+    const handleMediaCached = () => {
+      setMediaCacheTick(t => t + 1)
+    }
+    window.addEventListener('payload-media-cached', handleMediaCached)
+    return () => window.removeEventListener('payload-media-cached', handleMediaCached)
+  }, [])
+
+  const { data: initialData, isLoading, error } = useQuery({
+    queryKey: ['contact-page-data'],
+    queryFn: getContactPageData,
+    staleTime: 1000 * 60 * 5,
+    refetchOnWindowFocus: false,
+  })
+
+  useEffect(() => {
+    if (initialData) {
+      populateMediaCache(initialData)
+    }
+  }, [initialData])
+
+  const { data: liveData } = useLivePreview({
+    initialData,
+    serverURL: CMS_URL,
+    depth: 2,
+  })
+
+  useEffect(() => {
+    if (liveData) {
+      populateMediaCache(liveData)
+    }
+  }, [liveData])
+
+  const [postMessageData, setPostMessageData] = useState(null)
+
+  useEffect(() => {
+    const handleMessage = (event) => {
+      if (event?.data?.type === 'payload-live-preview' || event?.data?.slug === 'contact-page') {
         if (event.data.data) {
           setPostMessageData(event.data.data)
         }

@@ -5,12 +5,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Phone, Mail, MapPin, Clock, Send, Heart } from "lucide-react";
 import { useState } from "react";
-import { useHomePageLive } from "@/hooks/usePayloadLive";
+import { useContactPageLive } from "@/hooks/usePayloadLive";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
 
 const Contact = () => {
-    const { data: cmsData } = useHomePageLive();
+    const { data: cmsData } = useContactPageLive();
 
     const heading = cmsData?.contact_heading || "Get in Touch";
     const description = cmsData?.contact_description || "Have questions about our programs or want to get involved? We'd love to hear from you. Fill out the form below or reach out directly.";
