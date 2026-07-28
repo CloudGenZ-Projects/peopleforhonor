@@ -22,6 +22,7 @@ import MentorshipProgram from "./pages/programs/MentorshipProgram";
 import EventDetail from "./pages/EventDetail";
 import BraidingTraining from "./pages/programs/BraidingTraining";
 import CommunityCookingCulturalFood from "./pages/programs/CommunityCookingCulturalFood";
+import ProgramDetail from "./pages/programs/ProgramDetail";
 
 const queryClient = new QueryClient();
 
@@ -57,6 +58,10 @@ const App = () => (
                     <Route path="/programs/culture-community" element={<Navigate to="/service/culture-and-community-ottawa-program" replace />} />
                     <Route path="/programs/braiding-training" element={<BraidingTraining />} />
                     <Route path="/programs/community-cooking-cultural-food" element={<CommunityCookingCulturalFood />} />
+                    
+                    {/* Dynamic Program Detail Route for ANY new program created in Payload CMS! */}
+                    <Route path="/programs/:slug" element={<ProgramDetail />} />
+
                     {/* Dynamic event detail routes */}
                     <Route path="/:slug" element={<EventDetail />} />
                     <Route path="/events/:slug" element={<EventDetail />} />

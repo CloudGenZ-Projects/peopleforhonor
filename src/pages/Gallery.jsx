@@ -7,179 +7,58 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Play, Users, Image as ImageIcon, Video, ChevronLeft, ChevronRight } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
+import { Link } from "react-router-dom";
+import { useGalleryPageLive } from "@/hooks/usePayloadLive";
+import { getMediaUrl, getYouTubeVideoId } from "@/services/payloadApi";
 
 const Gallery = () => {
-    // Gallery items for images - Real People for Honor events
-    const imageItems = [
-        {
-            id: 2797,
-            title: "IMG-20241215-WA0038",
-            category: "gallery",
-            type: "image",
-            image: "https://peopleforhonor.com/wp-content/uploads/2024/12/IMG-20241215-WA0038.jpg",
-            description: "Year-end celebration",
-            date: "December 2024",
-            location: "People for Honor"
-        },
-        {
-            id: 2798,
-            title: "IMG-20241215-WA0037",
-            category: "gallery",
-            type: "image",
-            image: "https://peopleforhonor.com/wp-content/uploads/2024/12/IMG-20241215-WA0037.jpg",
-            description: "Year-end celebration",
-            date: "December 2024",
-            location: "People for Honor"
-        }
-    ];
+    const { data } = useGalleryPageLive();
 
-    // Gallery items for videos - from PFH Gallery page
-    const videoItems = [
-        {
-            id: 1,
-            title: "Gallery Video",
-            category: "gallery",
-            type: "video",
-            thumbnail: "https://img.youtube.com/vi/L8tsLvAhXYQ/maxresdefault.jpg",
-            videoUrl: "https://youtu.be/L8tsLvAhXYQ",
-            videoId: "L8tsLvAhXYQ",
-            description: "",
-            date: "",
-            location: ""
-        },
-        {
-            id: 2,
-            title: "Gallery Video",
-            category: "gallery",
-            type: "video",
-            thumbnail: "https://img.youtube.com/vi/MCi493kuCtg/maxresdefault.jpg",
-            videoUrl: "https://youtu.be/MCi493kuCtg",
-            videoId: "MCi493kuCtg",
-            description: "",
-            date: "",
-            location: ""
-        },
-        {
-            id: 3,
-            title: "Gallery Video",
-            category: "gallery",
-            type: "video",
-            thumbnail: "https://img.youtube.com/vi/mJ41FnYfi1M/maxresdefault.jpg",
-            videoUrl: "https://youtu.be/mJ41FnYfi1M",
-            videoId: "mJ41FnYfi1M",
-            description: "",
-            date: "",
-            location: ""
-        },
-        {
-            id: 4,
-            title: "Gallery Video",
-            category: "gallery",
-            type: "video",
-            thumbnail: "https://img.youtube.com/vi/r8Z0QHQY_Bk/maxresdefault.jpg",
-            videoUrl: "https://www.youtube.com/watch?v=r8Z0QHQY_Bk",
-            videoId: "r8Z0QHQY_Bk",
-            description: "",
-            date: "",
-            location: ""
-        },
-        {
-            id: 5,
-            title: "Gallery Video",
-            category: "gallery",
-            type: "video",
-            thumbnail: "https://img.youtube.com/vi/CeBroypqQLQ/maxresdefault.jpg",
-            videoUrl: "https://youtu.be/CeBroypqQLQ",
-            videoId: "CeBroypqQLQ",
-            description: "",
-            date: "",
-            location: ""
-        },
-        {
-            id: 6,
-            title: "Gallery Video",
-            category: "gallery",
-            type: "video",
-            thumbnail: "https://img.youtube.com/vi/I8B-j-UBFzs/maxresdefault.jpg",
-            videoUrl: "https://youtu.be/I8B-j-UBFzs",
-            videoId: "I8B-j-UBFzs",
-            description: "",
-            date: "",
-            location: ""
-        },
-        {
-            id: 7,
-            title: "Gallery Video",
-            category: "gallery",
-            type: "video",
-            thumbnail: "https://img.youtube.com/vi/2Azj1KLcz_o/maxresdefault.jpg",
-            videoUrl: "https://youtu.be/2Azj1KLcz_o",
-            videoId: "2Azj1KLcz_o",
-            description: "",
-            date: "",
-            location: ""
-        },
-        {
-            id: 8,
-            title: "Gallery Video",
-            category: "gallery",
-            type: "video",
-            thumbnail: "https://img.youtube.com/vi/2FHO9-0mGzc/maxresdefault.jpg",
-            videoUrl: "https://youtu.be/2FHO9-0mGzc",
-            videoId: "2FHO9-0mGzc",
-            description: "",
-            date: "",
-            location: ""
-        },
-        {
-            id: 9,
-            title: "Gallery Video",
-            category: "gallery",
-            type: "video",
-            thumbnail: "https://img.youtube.com/vi/wc7qLue8JiA/maxresdefault.jpg",
-            videoUrl: "https://youtu.be/wc7qLue8JiA",
-            videoId: "wc7qLue8JiA",
-            description: "",
-            date: "",
-            location: ""
-        },
-        {
-            id: 10,
-            title: "Gallery Video",
-            category: "gallery",
-            type: "video",
-            thumbnail: "https://img.youtube.com/vi/EuqJ_fj4nlk/maxresdefault.jpg",
-            videoUrl: "https://youtu.be/EuqJ_fj4nlk",
-            videoId: "EuqJ_fj4nlk",
-            description: "",
-            date: "",
-            location: ""
-        },
-        {
-            id: 11,
-            title: "Gallery Video",
-            category: "gallery",
-            type: "video",
-            thumbnail: "https://img.youtube.com/vi/vx_riA-W03Q/maxresdefault.jpg",
-            videoUrl: "https://youtu.be/vx_riA-W03Q",
-            videoId: "vx_riA-W03Q",
-            description: "",
-            date: "",
-            location: ""
-        },
-        {
-            id: 12,
-            title: "Gallery Video",
-            category: "gallery",
-            type: "video",
-            thumbnail: "https://img.youtube.com/vi/OB-0fGkGFK4/maxresdefault.jpg",
-            videoUrl: "https://youtu.be/OB-0fGkGFK4",
-            videoId: "OB-0fGkGFK4",
-            description: "",
-            date: "",
-            location: ""
-        }
-    ];
+    const heroTitle = data?.hero_title;
+    const heroSubtitle = data?.hero_subtitle;
+
+    const rawImages = data?.images || [];
+    const rawVideos = data?.videos || [];
+
+    const ctaHeading = data?.cta_heading;
+    const ctaDescription = data?.cta_description;
+    const ctaBtn1Text = data?.cta_btn1_text;
+    const ctaBtn1Link = data?.cta_btn1_link;
+    const ctaBtn2Text = data?.cta_btn2_text;
+    const ctaBtn2Link = data?.cta_btn2_link;
+
+    // Process images dynamically from Payload CMS
+    const imageItems = rawImages.map((item, idx) => {
+        const imageSrc = getMediaUrl(item.image, item.imageUrl || item.image);
+        return {
+            id: item.id || idx + 1,
+            title: item.title || `Gallery Image ${idx + 1}`,
+            category: item.category || 'gallery',
+            type: 'image',
+            image: imageSrc,
+            description: item.description || '',
+            date: item.date || '',
+            location: item.location || '',
+        };
+    });
+
+    // Process YouTube videos dynamically from Payload CMS
+    const videoItems = rawVideos.map((item, idx) => {
+        const videoId = getYouTubeVideoId(item.youtube_url || item.videoUrl || item.videoId);
+        const thumbnailSrc = item.thumbnail || `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+        return {
+            id: item.id || idx + 1,
+            title: item.title || 'Gallery Video',
+            category: item.category || 'gallery',
+            type: 'video',
+            thumbnail: thumbnailSrc,
+            videoUrl: item.youtube_url || `https://youtu.be/${videoId}`,
+            videoId: videoId,
+            description: item.description || '',
+            date: item.date || '',
+            location: item.location || '',
+        };
+    });
 
     const renderMediaGrid = (items, isVideo = false) => (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -200,19 +79,25 @@ const Gallery = () => {
                                         </div>
                                     </div>
                                 )}
-                                <div className="absolute top-2 left-2">
-                                    <Badge variant="secondary" className="text-xs capitalize">
-                                        {item.category.replace('-', ' ')}
-                                    </Badge>
-                                </div>
+                                {item.category && (
+                                    <div className="absolute top-2 left-2">
+                                        <Badge variant="secondary" className="text-xs capitalize">
+                                            {item.category.replace('-', ' ')}
+                                        </Badge>
+                                    </div>
+                                )}
                             </div>
                             <div className="p-4">
-                                <h3 className="font-semibold text-foreground mb-2 line-clamp-2">
-                                    {item.title}
-                                </h3>
-                                <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
-                                    {item.description}
-                                </p>
+                                {item.title && (
+                                    <h3 className="font-semibold text-foreground mb-2 line-clamp-2">
+                                        {item.title}
+                                    </h3>
+                                )}
+                                {item.description && (
+                                    <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
+                                        {item.description}
+                                    </p>
+                                )}
                             </div>
                         </Card>
                     </DialogTrigger>
@@ -246,6 +131,8 @@ const Gallery = () => {
         const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
         const scrollPrev = () => emblaApi && emblaApi.scrollPrev();
         const scrollNext = () => emblaApi && emblaApi.scrollNext();
+
+        if (!items || items.length === 0) return null;
 
         return (
             <div className="relative max-w-3xl md:max-w-4xl mx-auto">
@@ -289,13 +176,8 @@ const Gallery = () => {
                 <section className="py-20 bg-gradient-primary text-primary-foreground">
                     <div className="container mx-auto px-4">
                         <div className="max-w-4xl mx-auto text-center">
-                            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                                Our Community Voice
-                            </h1>
-                            <p className="text-xl leading-relaxed opacity-90">
-                                Real voices. Real stories. Our community is at the heart of everything we do, built by them, for them.
-                                Explore the videos and images below to hear their stories and experiences of our community members.
-                            </p>
+                            {heroTitle && <h1 className="text-4xl md:text-5xl font-bold mb-6">{heroTitle}</h1>}
+                            {heroSubtitle && <p className="text-xl leading-relaxed opacity-90">{heroSubtitle}</p>}
                         </div>
                     </div>
                 </section>
@@ -320,21 +202,25 @@ const Gallery = () => {
                                     </TabsTrigger>
                                 </TabsList>
 
-                                <TabsContent value="all" className="mt-8">
-                                    <div className="mb-12">
-                                        <ImageSlider items={imageItems} />
-                                    </div>
-                                    <div>
-                                        <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
-                                            <Video className="h-6 w-6 text-primary" />
-                                            Videos
-                                            <Badge variant="outline">{videoItems.length}</Badge>
-                                        </h2>
-                                        {renderMediaGrid(videoItems, true)}
-                                    </div>
+                                <TabsContent value="all" className="mt-8 w-full">
+                                    {imageItems.length > 0 && (
+                                        <div className="mb-12">
+                                            <ImageSlider items={imageItems} />
+                                        </div>
+                                    )}
+                                    {videoItems.length > 0 && (
+                                        <div>
+                                            <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
+                                                <Video className="h-6 w-6 text-primary" />
+                                                Videos
+                                                <Badge variant="outline">{videoItems.length}</Badge>
+                                            </h2>
+                                            {renderMediaGrid(videoItems, true)}
+                                        </div>
+                                    )}
                                 </TabsContent>
 
-                                <TabsContent value="images" className="mt-8">
+                                <TabsContent value="images" className="mt-8 w-full">
                                     <div className="mb-6 text-center">
                                         <p className="text-muted-foreground">
                                             Showing {imageItems.length} {imageItems.length === 1 ? 'image' : 'images'}
@@ -343,7 +229,7 @@ const Gallery = () => {
                                     <ImageSlider items={imageItems} />
                                 </TabsContent>
 
-                                <TabsContent value="videos" className="mt-8">
+                                <TabsContent value="videos" className="mt-8 w-full">
                                     <div className="mb-6 text-center">
                                         <p className="text-muted-foreground">
                                             Showing {videoItems.length} {videoItems.length === 1 ? 'video' : 'videos'}
@@ -361,20 +247,19 @@ const Gallery = () => {
                     <div className="container mx-auto px-4">
                         <div className="max-w-2xl mx-auto text-center">
                             <Card className="p-8 bg-gradient-card border-0 shadow-strong">
-                                <h2 className="text-2xl font-bold text-foreground mb-4">
-                                    Be Part of Our Story
-                                </h2>
-                                <p className="text-muted-foreground mb-6">
-                                    Every photo and video represents a life transformed, a connection made,
-                                    and a step toward a brighter future. Join us and become part of these amazing stories.
-                                </p>
+                                {ctaHeading && <h2 className="text-2xl font-bold text-foreground mb-4">{ctaHeading}</h2>}
+                                {ctaDescription && <p className="text-muted-foreground mb-6">{ctaDescription}</p>}
                                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                                    <Button className="bg-gradient-primary hover:bg-primary-hover" asChild>
-                                        <a href="/programs">Join Our Programs</a>
-                                    </Button>
-                                    <Button variant="outline" asChild>
-                                        <a href="/join">Volunteer With Us</a>
-                                    </Button>
+                                    {ctaBtn1Text && ctaBtn1Link && (
+                                        <Button className="bg-gradient-primary hover:bg-primary-hover" asChild>
+                                            <Link to={ctaBtn1Link}>{ctaBtn1Text}</Link>
+                                        </Button>
+                                    )}
+                                    {ctaBtn2Text && ctaBtn2Link && (
+                                        <Button variant="outline" asChild>
+                                            <Link to={ctaBtn2Link}>{ctaBtn2Text}</Link>
+                                        </Button>
+                                    )}
                                 </div>
                             </Card>
                         </div>

@@ -74,6 +74,24 @@ export async function getProgramsPageData() {
 }
 
 /**
+ * Fetch GalleryPage Global data from Payload CMS
+ */
+export async function getGalleryPageData() {
+  try {
+    const res = await fetch(`${CMS_URL}/api/globals/gallery-page?depth=2`)
+    if (!res.ok) {
+      throw new Error(`Failed to fetch gallery page data: ${res.statusText}`)
+    }
+    const data = await res.json()
+    populateMediaCache(data)
+    return data
+  } catch (error) {
+    console.error('Error fetching GalleryPage data from Payload CMS:', error)
+    return null
+  }
+}
+
+/**
  * Fetch individual Program Detail by slug from Payload CMS Collection
  */
 export async function getProgramDetailBySlug(slug) {
