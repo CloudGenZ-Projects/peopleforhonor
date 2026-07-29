@@ -12,7 +12,7 @@ import {
   populateMediaCache,
 } from '@/services/payloadApi'
 
-const CMS_URL = import.meta.env.VITE_CMS_URL || 'https://client.cloudgenz.com'
+const CMS_URL = import.meta.env.VITE_CMS_URL || 'https://pfh-cms.cloudgenz.com'
 
 /**
  * Custom hook combining TanStack React Query + Payload Live Preview for HomePage

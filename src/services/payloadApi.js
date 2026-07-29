@@ -1,4 +1,4 @@
-const CMS_URL = import.meta.env.VITE_CMS_URL || 'https://client.cloudgenz.com'
+const CMS_URL = import.meta.env.VITE_CMS_URL || 'https://pfh-cms.cloudgenz.com'
 
 // Global in-memory cache map for populated media objects
 const mediaCacheMap = new Map()
