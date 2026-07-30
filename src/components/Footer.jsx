@@ -77,13 +77,13 @@ const Footer = () => {
                                 <span className="text-xs sm:text-sm break-all">info@peopleforhonor.com</span>
                             </a>
                             <a
-                                href="https://maps.google.com/?q=1505+laperrieve+Ave+Suite+506+Ottawa+ON+K127T1"
+                                href="https://maps.google.com/?q=1505+Laperriere+Ave+Suite+506+Ottawa+ON+K1Z+7T1"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-start gap-2 sm:gap-3 text-background/80 hover:text-primary transition-colors"
                             >
                                 <MapPin className="h-3 w-3 sm:h-4 sm:w-4 text-primary mt-0.5 flex-shrink-0" />
-                                <span className="text-xs sm:text-sm">1505 laperrieve Ave Suite 506<br />Ottawa, ON, K127T1</span>
+                                <span className="text-xs sm:text-sm">1505 Laperriere Ave Suite 506<br />Ottawa, ON K1Z 7T1</span>
                             </a>
                         </div>
                     </div>

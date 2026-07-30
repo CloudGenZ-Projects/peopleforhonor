@@ -4,8 +4,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Heart, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useProgramDetailLive } from "@/hooks/usePayloadLive";
 
 const CultureCommunity = () => {
+    const { data } = useProgramDetailLive('culture-and-community-ottawa-program');
+
+    const title = data?.title || "Culture & Community";
+    const heroSubtitle = data?.hero_subtitle || "Find your Community in Ottawa. We host activities that bring people together because healing doesn’t always come from a workshop; sometimes, it comes from dancing, laughing, or cooking a familiar meal with someone who understands your story.";
     return (
         <div className="min-h-screen">
             <Header />

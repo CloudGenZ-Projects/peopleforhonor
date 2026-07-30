@@ -43,7 +43,7 @@ const CulturalDanceExchange = () => {
                                         <div className="flex items-center gap-2 text-muted-foreground">
                                             <Calendar className="h-5 w-5 text-primary" />
                                             <span>
-                                                <strong>Date:</strong> September 6, 2025
+                                                <strong>Date:</strong> Saturday, November 22, 2025
                                             </span>
                                         </div>
                                         <div className="flex items-center gap-2 text-muted-foreground">

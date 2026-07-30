@@ -62,8 +62,11 @@ const App = () => (
                     <Route path="/programs/sewing-beginners" element={<SewingBeginners />} />
                     <Route path="/programs/entrepreneurship-launchpad" element={<EntrepreneurshipLaunchpad />} />
                     <Route path="/programs/cultural-dance" element={<CulturalDance />} />
+                    <Route path="/services" element={<Programs />} />
                     <Route path="/service/culture-and-community-ottawa-program" element={<CultureCommunity />} />
                     <Route path="/programs/culture-community" element={<Navigate to="/service/culture-and-community-ottawa-program" replace />} />
+                    <Route path="/service/:slug" element={<ProgramDetail />} />
+                    <Route path="/services/:slug" element={<ProgramDetail />} />
                     <Route path="/programs/braiding-training" element={<BraidingTraining />} />
                     <Route path="/programs/community-cooking-cultural-food" element={<CommunityCookingCulturalFood />} />
                     
