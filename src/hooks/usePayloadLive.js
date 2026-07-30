@@ -456,7 +456,11 @@ export function useProgramDetailLive(slug) {
 
   useEffect(() => {
     const handleMessage = (event) => {
-      if (event?.data?.type === 'payload-live-preview' || event?.data?.slug === slug) {
+      if (
+        event?.data?.type === 'payload-live-preview' ||
+        event?.data?.slug === slug ||
+        event?.data?.data?.slug === slug
+      ) {
         if (event.data.data) {
           setPostMessageData(event.data.data)
         }
