@@ -14,6 +14,13 @@ import {
 
 const CMS_URL = import.meta.env.VITE_CMS_URL || 'https://pfh-cms.cloudgenz.com'
 
+function getBestData(postMessageData, liveData, initialData) {
+  const isValid = (d) => d && typeof d === 'object' && Object.keys(d).length > 2
+  if (isValid(postMessageData)) return postMessageData
+  if (isValid(liveData)) return liveData
+  return initialData
+}
+
 /**
  * Custom hook combining TanStack React Query + Payload Live Preview for HomePage
  */
@@ -31,8 +38,9 @@ export function useHomePageLive() {
   const { data: initialData, isLoading, error } = useQuery({
     queryKey: ['home-page-data'],
     queryFn: getHomePageData,
-    staleTime: 1000 * 60 * 5,
+    staleTime: 1000 * 60 * 60, // 1 hour stale time
     refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
   })
 
   useEffect(() => {
@@ -68,7 +76,7 @@ export function useHomePageLive() {
   }, [])
 
   const activeData = useMemo(() => {
-    return postMessageData || liveData || initialData
+    return getBestData(postMessageData, liveData, initialData)
   }, [postMessageData, liveData, initialData])
 
   return {
@@ -95,8 +103,9 @@ export function useAboutPageLive() {
   const { data: initialData, isLoading, error } = useQuery({
     queryKey: ['about-page-data'],
     queryFn: getAboutPageData,
-    staleTime: 1000 * 60 * 5,
+    staleTime: 1000 * 60 * 60,
     refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
   })
 
   useEffect(() => {
@@ -132,7 +141,7 @@ export function useAboutPageLive() {
   }, [])
 
   const activeData = useMemo(() => {
-    return postMessageData || liveData || initialData
+    return getBestData(postMessageData, liveData, initialData)
   }, [postMessageData, liveData, initialData])
 
   return {
@@ -159,8 +168,9 @@ export function useProgramsPageLive() {
   const { data: initialData, isLoading, error } = useQuery({
     queryKey: ['programs-page-data'],
     queryFn: getProgramsPageData,
-    staleTime: 1000 * 60 * 5,
+    staleTime: 1000 * 60 * 60,
     refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
   })
 
   useEffect(() => {
@@ -196,7 +206,7 @@ export function useProgramsPageLive() {
   }, [])
 
   const activeData = useMemo(() => {
-    return postMessageData || liveData || initialData
+    return getBestData(postMessageData, liveData, initialData)
   }, [postMessageData, liveData, initialData])
 
   return {
@@ -223,8 +233,9 @@ export function useGalleryPageLive() {
   const { data: initialData, isLoading, error } = useQuery({
     queryKey: ['gallery-page-data'],
     queryFn: getGalleryPageData,
-    staleTime: 1000 * 60 * 5,
+    staleTime: 1000 * 60 * 60,
     refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
   })
 
   useEffect(() => {
@@ -260,7 +271,7 @@ export function useGalleryPageLive() {
   }, [])
 
   const activeData = useMemo(() => {
-    return postMessageData || liveData || initialData
+    return getBestData(postMessageData, liveData, initialData)
   }, [postMessageData, liveData, initialData])
 
   return {
@@ -287,8 +298,9 @@ export function useJoinUsPageLive() {
   const { data: initialData, isLoading, error } = useQuery({
     queryKey: ['join-us-page-data'],
     queryFn: getJoinUsPageData,
-    staleTime: 1000 * 60 * 5,
+    staleTime: 1000 * 60 * 60,
     refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
   })
 
   useEffect(() => {
@@ -324,7 +336,7 @@ export function useJoinUsPageLive() {
   }, [])
 
   const activeData = useMemo(() => {
-    return postMessageData || liveData || initialData
+    return getBestData(postMessageData, liveData, initialData)
   }, [postMessageData, liveData, initialData])
 
   return {
@@ -351,8 +363,9 @@ export function useContactPageLive() {
   const { data: initialData, isLoading, error } = useQuery({
     queryKey: ['contact-page-data'],
     queryFn: getContactPageData,
-    staleTime: 1000 * 60 * 5,
+    staleTime: 1000 * 60 * 60,
     refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
   })
 
   useEffect(() => {
@@ -388,7 +401,7 @@ export function useContactPageLive() {
   }, [])
 
   const activeData = useMemo(() => {
-    return postMessageData || liveData || initialData
+    return getBestData(postMessageData, liveData, initialData)
   }, [postMessageData, liveData, initialData])
 
   return {
@@ -415,9 +428,10 @@ export function useProgramDetailLive(slug) {
   const { data: initialData, isLoading, error } = useQuery({
     queryKey: ['program-detail', slug],
     queryFn: () => getProgramDetailBySlug(slug),
-    staleTime: 1000 * 60 * 5,
+    staleTime: 1000 * 60 * 60,
     enabled: !!slug,
     refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
   })
 
   useEffect(() => {
@@ -453,7 +467,7 @@ export function useProgramDetailLive(slug) {
   }, [slug])
 
   const activeData = useMemo(() => {
-    return postMessageData || liveData || initialData
+    return getBestData(postMessageData, liveData, initialData)
   }, [postMessageData, liveData, initialData])
 
   return {

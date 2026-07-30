@@ -24,7 +24,15 @@ import BraidingTraining from "./pages/programs/BraidingTraining";
 import CommunityCookingCulturalFood from "./pages/programs/CommunityCookingCulturalFood";
 import ProgramDetail from "./pages/programs/ProgramDetail";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+      staleTime: 1000 * 60 * 60,
+    },
+  },
+});
 
 function ScrollToTop() {
     const { pathname } = useLocation();
