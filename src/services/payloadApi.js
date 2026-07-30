@@ -20,11 +20,11 @@ export function populateMediaCache(data) {
 }
 
 /**
- * Fetch HomePage Global data from Payload CMS
+ * Fetch HomePage Global data from Payload CMS (with timestamp to bust browser cache cleanly)
  */
 export async function getHomePageData() {
   try {
-    const res = await fetch(`${CMS_URL}/api/globals/home-page?depth=2`)
+    const res = await fetch(`${CMS_URL}/api/globals/home-page?depth=2&_t=${Date.now()}`)
     if (!res.ok) {
       throw new Error(`Failed to fetch home page data: ${res.statusText}`)
     }
@@ -42,7 +42,7 @@ export async function getHomePageData() {
  */
 export async function getAboutPageData() {
   try {
-    const res = await fetch(`${CMS_URL}/api/globals/about-page?depth=2`)
+    const res = await fetch(`${CMS_URL}/api/globals/about-page?depth=2&_t=${Date.now()}`)
     if (!res.ok) {
       throw new Error(`Failed to fetch about page data: ${res.statusText}`)
     }
@@ -60,7 +60,7 @@ export async function getAboutPageData() {
  */
 export async function getProgramsPageData() {
   try {
-    const res = await fetch(`${CMS_URL}/api/globals/programs-page?depth=2`)
+    const res = await fetch(`${CMS_URL}/api/globals/programs-page?depth=2&_t=${Date.now()}`)
     if (!res.ok) {
       throw new Error(`Failed to fetch programs page data: ${res.statusText}`)
     }
@@ -78,7 +78,7 @@ export async function getProgramsPageData() {
  */
 export async function getGalleryPageData() {
   try {
-    const res = await fetch(`${CMS_URL}/api/globals/gallery-page?depth=2`)
+    const res = await fetch(`${CMS_URL}/api/globals/gallery-page?depth=2&_t=${Date.now()}`)
     if (!res.ok) {
       throw new Error(`Failed to fetch gallery page data: ${res.statusText}`)
     }
@@ -96,7 +96,7 @@ export async function getGalleryPageData() {
  */
 export async function getJoinUsPageData() {
   try {
-    const res = await fetch(`${CMS_URL}/api/globals/join-us-page?depth=2`)
+    const res = await fetch(`${CMS_URL}/api/globals/join-us-page?depth=2&_t=${Date.now()}`)
     if (!res.ok) {
       throw new Error(`Failed to fetch join us page data: ${res.statusText}`)
     }
@@ -114,7 +114,7 @@ export async function getJoinUsPageData() {
  */
 export async function getContactPageData() {
   try {
-    const res = await fetch(`${CMS_URL}/api/globals/contact-page?depth=2`)
+    const res = await fetch(`${CMS_URL}/api/globals/contact-page?depth=2&_t=${Date.now()}`)
     if (!res.ok) {
       throw new Error(`Failed to fetch contact page data: ${res.statusText}`)
     }
@@ -133,7 +133,9 @@ export async function getContactPageData() {
 export async function getProgramDetailBySlug(slug) {
   if (!slug) return null
   try {
-    const res = await fetch(`${CMS_URL}/api/program-details?where[slug][equals]=${encodeURIComponent(slug)}&depth=2`)
+    const res = await fetch(
+      `${CMS_URL}/api/program-details?where[slug][equals]=${encodeURIComponent(slug)}&depth=2&_t=${Date.now()}`
+    )
     if (!res.ok) {
       throw new Error(`Failed to fetch program detail for ${slug}: ${res.statusText}`)
     }
@@ -208,7 +210,7 @@ export function getMediaUrl(mediaObj, fallbackUrl = null) {
 
   // 4. If mediaObj is a new ID not in cache yet, fetch it silently in background!
   if (/^\d+$/.test(strId)) {
-    fetch(`${CMS_URL}/api/media/${strId}`)
+    fetch(`${CMS_URL}/api/media/${strId}?_t=${Date.now()}`)
       .then(res => res.json())
       .then(fetchedMedia => {
         if (fetchedMedia && (fetchedMedia.url || fetchedMedia.filename)) {
