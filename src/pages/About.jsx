@@ -127,42 +127,45 @@ const About = () => {
                                 )}
 
                                 {/* Section 1 */}
-                                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-10">
-                                    <div className="lg:col-span-7 space-y-4">
-                                        {founderSec1Title && (
-                                            <h3 className="text-xl md:text-2xl font-bold text-foreground">
-                                                {founderSec1Title}
-                                            </h3>
-                                        )}
-                                        {founderSec1P1 && (
-                                            <p className="text-lg leading-relaxed text-muted-foreground">
-                                                {founderSec1P1}
-                                            </p>
-                                        )}
-                                        {founderSec1P2 && (
-                                            <p className="text-lg leading-relaxed text-muted-foreground">
-                                                {founderSec1P2}
-                                            </p>
-                                        )}
-                                    </div>
-
-                                    <div className="lg:col-span-5">
-                                        <div className="relative rounded-2xl overflow-hidden shadow-strong border border-border/50 bg-muted/30 group">
-                                            {founderImgUrl && (
-                                                <img
-                                                    src={founderImgUrl}
-                                                    alt={founderName || "Mr. Francis Ukposidolo"}
-                                                    className="w-full h-[360px] sm:h-[400px] object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                                                />
+                                <div className="space-y-4 mb-10">
+                                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                                        <div className="lg:col-span-7 space-y-4">
+                                            {founderSec1Title && (
+                                                <h3 className="text-xl md:text-2xl font-bold text-foreground">
+                                                    {founderSec1Title}
+                                                </h3>
                                             )}
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent"></div>
-                                            <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                                                {founderName && <h4 className="text-xl font-bold">{founderName}</h4>}
-                                                {founderRole && <p className="text-sm text-white/90 font-medium mt-1">{founderRole}</p>}
-                                                {founderCredentials && <p className="text-xs text-white/75 mt-0.5">{founderCredentials}</p>}
+                                            {founderSec1P1 && (
+                                                <p className="text-lg leading-relaxed text-muted-foreground">
+                                                    {founderSec1P1}
+                                                </p>
+                                            )}
+                                        </div>
+
+                                        <div className="lg:col-span-5">
+                                            <div className="relative rounded-2xl overflow-hidden shadow-strong border border-border/50 bg-muted/30 group">
+                                                {founderImgUrl && (
+                                                    <img
+                                                        src={founderImgUrl}
+                                                        alt={founderName || "Mr. Francis Ukposidolo"}
+                                                        className="w-full h-[360px] sm:h-[400px] object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                                                    />
+                                                )}
+                                                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent"></div>
+                                                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                                                    {founderName && <h4 className="text-xl font-bold">{founderName}</h4>}
+                                                    {founderRole && <p className="text-sm text-white/90 font-medium mt-1">{founderRole}</p>}
+                                                    {founderCredentials && <p className="text-xs text-white/75 mt-0.5">{founderCredentials}</p>}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+
+                                    {founderSec1P2 && (
+                                        <p className="text-lg leading-relaxed text-muted-foreground text-justify">
+                                            {founderSec1P2}
+                                        </p>
+                                    )}
                                 </div>
 
                                 {/* Section 2 */}
