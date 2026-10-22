@@ -27,7 +27,7 @@ const CulturalDanceExchange = () => {
                     <div className="container mx-auto px-4">
                         <div className="max-w-3xl mx-auto">
                             <img
-                                src="/aboutUs.jpg"
+                                src="/images/cultural-dance-exchange.png"
                                 alt="African Caribbean Cultural Dance Exchange"
                                 className="w-full h-auto rounded-xl shadow-medium mb-8"
                             />
