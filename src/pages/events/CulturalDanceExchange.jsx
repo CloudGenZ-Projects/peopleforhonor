@@ -27,7 +27,7 @@ const CulturalDanceExchange = () => {
                     <div className="container mx-auto px-4">
                         <div className="max-w-3xl mx-auto">
                             <img
-                                src="https://peopleforhonor.com/wp-content/uploads/2025/08/Subheading-2-819x1024.png"
+                                src="/aboutUs.jpg"
                                 alt="African Caribbean Cultural Dance Exchange"
                                 className="w-full h-auto rounded-xl shadow-medium mb-8"
                             />

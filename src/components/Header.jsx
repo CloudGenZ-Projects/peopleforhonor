@@ -24,7 +24,7 @@ const Header = () => {
                     {/* Logo */}
                     <NavLink to="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
                         <img
-                            src="https://peopleforhonor.com/wp-content/uploads/2024/11/People-For-Honour-1.png"
+                            src="/PeopleForHonour.png"
                             alt="People for Honor Logo"
                             className="h-12 w-auto"
                         />

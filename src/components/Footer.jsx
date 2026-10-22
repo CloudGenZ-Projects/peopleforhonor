@@ -50,7 +50,7 @@ const Footer = () => {
                     <div className="sm:col-span-2 lg:col-span-1">
                         <Link to="/" className="inline-block mb-4 sm:mb-6 hover:opacity-80 transition-opacity">
                             <img
-                                src="https://peopleforhonor.com/wp-content/uploads/2024/11/People-For-Honour-1.png"
+                                src="/PeopleForHonour.png"
                                 alt="People for Honor Logo"
                                 className="h-10 sm:h-12 w-auto brightness-0 invert"
                             />
