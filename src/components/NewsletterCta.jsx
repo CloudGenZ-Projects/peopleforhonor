@@ -40,7 +40,7 @@ const NewsletterCta = () => {
         setMessage({ type: '', text: '' });
 
         try {
-            const response = await fetch(`${API_BASE}/api/join/submit.php`, {
+            const response = await fetch(`${API_BASE}/api/join/submit`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

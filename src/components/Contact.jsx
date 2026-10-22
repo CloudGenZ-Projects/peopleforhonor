@@ -84,7 +84,7 @@ const Contact = () => {
                 message: formData.message,
             };
 
-            const res = await fetch(`${API_BASE}/api/contact/submit.php`, {
+            const res = await fetch(`${API_BASE}/api/contact/submit`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)

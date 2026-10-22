@@ -31,7 +31,7 @@ const UpcomingEvents = () => {
 
     const fetchEvents = async () => {
         try {
-            const response = await fetch(`${API_BASE}/api/events/read.php`);
+            const response = await fetch(`${API_BASE}/api/events/read`);
 
             if (response.ok) {
                 const data = await response.json();

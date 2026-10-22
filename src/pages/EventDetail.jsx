@@ -218,7 +218,7 @@ const EventDetail = () => {
 
     const fetchEvent = async () => {
         try {
-            const response = await fetch(`${API_BASE}/api/events/read_by_slug.php?slug=${encodeURIComponent(slug)}`);
+            const response = await fetch(`${API_BASE}/api/events/read_by_slug?slug=${encodeURIComponent(slug)}`);
             const data = await response.json();
 
             if (response.ok && data.success) {
